@@ -1,0 +1,1445 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<title>SciCan</title>
+
+<script src="js/loadjscssfile.js" type="text/javascript"></script>
+<script src="js/g4_04l.js" type="text/javascript"></script>
+
+<link rel="icon" href="images/favicon.gif" type="image/x-icon" />
+
+<script type="text/javascript">
+	function processContacts() {
+		setTab('setup');
+	}
+</script>
+
+
+<style type="text/css">
+label.error {
+	background: url(   "images/unchecked.gif" ) no-repeat 0px 0px;
+	padding-left: 16px;
+	padding-bottom: 2px;
+	font-weight: bold;
+	color: #EA5200;
+}
+
+label.checked {
+	color: #080;
+	background: url(   "images/checked.gif" ) no-repeat 0px 0px;
+}
+</style>
+</head>
+<body onLoad="initializeUnitTimeTimer()">
+	<div id='hdr'>
+<div id='scican-hdr'>
+	<div id="scican-hdr-main">
+		<div id="scican-hdr-wrap">
+			<a href="http://www.scican.com/?portal"> <img id="logoImage" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA="
+				alt="" /> </a>
+			<div id="" style="float: right; text-align: right;">
+				<table style="width: 500px;">
+					<tbody>
+						<tr>
+							<td style="vertical-align: middle">
+								<div><b><span id="office"></span></b></div>
+								<div id="officeTel">Phone: </div>
+							</td>
+							<td style="vertical-align: middle">
+								<div class="logo">
+									<img id="logo" class="logo" src="images/officeLogo.png"
+										alt="Office Logo" />
+								</div></td>
+							<td style="vertical-align: middle"><img id="statimImage"
+								src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="" /><br />SN: <span
+								id="serialNum"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="hdr-nav" class="scican-hdr-nav clearfix" style="">
+	<ul id="nav-menu">
+		<li id="nav-home"><a href="index.html">Home</a>
+		</li>
+		<li id="nav-status"><a href="status.html">Status</a>
+		</li>
+		<li id="nav-archives"><a href="archives.html">Archives</a>
+		</li>
+		<li id="nav-setup"><a href="setup.html">Setup</a>
+		</li>
+		<li id="nav-help"><a href="help.html">Help</a>
+		</li>
+	</ul>
+</div>
+	</div>
+	<div id="hdr-subnav" class="scican-hdr-subnav clearfix">
+		<ul id="subnav-menu">
+			<li id="contactsLink"  class="active"><span><a href="javascript:pageFlip('contacts');">Contacts</a></span></li>
+			<li id="lanLink" ><span><a href="javascript:pageFlip('lan');">LAN</a></span></li>
+			<li id="notificationsLink" ></span><span><a href="javascript:pageFlip('notifications');">Notifications</a></span></li>
+			<li id="remoteLink" style = "display:none"></span><span><a href="javascript:pageFlip('remote');">Remote</a></span></li>
+			<li id="timeLink" ><span><a href="javascript:pageFlip('time');">Time</a></span></li>
+			<li id="passwordLink" ></span><span><a href="javascript:pageFlip('password');">Password</a></span></li>
+			<li id="backupLink" ></span><span><a href="javascript:pageFlip('backup');">Backup</a></span></li>
+			<li id="updatesLink" ></span><span><a href="javascript:pageFlip('updates');">Updates</a></span></li>
+			<li id="toolsLink" ><span><a href="javascript:pageFlip('tools');">Tools</a></span></li>
+		</ul>
+	</div>
+	<div id="content-wrap">
+		<div id="content" style="display: block; margin: 0px auto;">
+			<div>
+				<img id="ticker_top_grey" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="" />
+			</div>
+			<div class="clearfix" id="ticker-middle-grey">
+				<div id="sidebar">
+					<div id="sidebarMenu">
+						<div>
+							<ul>
+								<li class="sidebarFooterLi"><a href="http://www.scican.com/?portal" target="_blank" rel="noopener noreferrer" id="linkScican">
+									<span class="helperSpan"></span><span class="sidebarFooterSpanPic"><img id="linkScicanImg" class="sidebarFooterPic" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" /></span><span class="sidebarFooterSpanText">SciCan Web Site</span>
+								</a></li>
+								<li class="sidebarFooterLi"><a href="http://www.scicancanada.ca/index.cfm?pagepath=Home/Register_your_warranty&id=16173&portal" target="_blank" rel="noopener noreferrer" id="linkWarranty">
+									<span class="helperSpan"></span><span class="sidebarFooterSpanPic"><img id="linkWarrantyImg" class="sidebarFooterPic" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" /></span><span class="sidebarFooterSpanText">Warranty Registration</span>
+								</a></li>
+								<li class="sidebarFooterLi"><a href="http://www.scicancanada.ca/index.cfm?pagepath=Home/SciCanTV_videos&id=33111&portal" target="_blank" rel="noopener noreferrer" id="linkTV">
+									<span class="helperSpan"></span><span class="sidebarFooterSpanPic"><img id="linkTVImg" class="sidebarFooterPic" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" /></span><span class="sidebarFooterSpanText">SciCan TV</span>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="main" style="width: 658px">
+					<div id="main-content">
+						<div id="mainContent">
+							<div id="contacts">
+								<h1>Contacts</h1>
+								<div id="copySettings" class="hideme">
+									<h2>Copy Contacts</h2>
+									<select id="selectUnit" name="units" class="unitsDropdown" onchange="unitChanged()">
+										<option value="" selected="selected" disabled="disabled">none</option>
+									</select>
+									<input type="button" class="button" onclick="copyToMainUnit()" id="copy" value="Copy" />
+								</div>
+								<form class="cmxform" id="contactsForm" method="get" action="">
+									<fieldset>
+										<table width="100%" style="padding-right: 20px;">
+											<tbody>
+												<tr>
+													<td width="22%"></td>
+													<td width="25%"></td>
+													<td width="6%"></td>
+													<td width="22%"></td>
+													<td width="25%"></td>
+												</tr>
+												<tr>
+													<td colspan="2"><h2>Doctor Information</h2></td>
+													<td>&nbsp;</td>
+													<td colspan="2" rowspan="18">
+														<h2>Office Logo</h2>
+														Max pixels: 200 x 90
+														<input type="file" id="datafile" name="datafile" size="15" />
+														<div style="vertical-align: middle; text-align: center;">
+															<input type="button" value="Upload Logo" onclick="uploadLogo()" class="button" />
+														</div>
+														<div id="contactsLogoFrame">
+															<span class="helperSpan"></span><img id="contactsLogoImage" src="images/officeLogo.png" alt="office Logo" />
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>Title: </td>
+													<td>
+														<select id="officeContactTitle" class="contactsDropdown" name="officeContactTitle">
+																<option value="" selected="selected" disabled="disabled">none</option>
+																<option value="Dr.">Dr.</option>
+																<option value="Mr. ">Mr.</option>
+																<option value="Miss">Miss.</option>
+																<option value="Mrs.">Mrs.</option>
+														</select> 
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>First Name: </td>
+													<td><input id="officeContactFirstName" name="officeContactFirstName"
+														type="text" style="width: 140px" /></td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr id="setupInputOfficeContactMiddleName">
+													<td>Middle Initial: </td>
+													<td><input id="officeContactMiddleName" name="officeContactMiddleName"
+														type="text" style="width: 140px" /></td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>Last Name: </td>
+													<td><input id="officeContactLastName" name="officeContactLastName"
+														type="text" style="width: 140px" /></td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td colspan="3">
+														<h2>Office Information</h2>
+													</td>
+												</tr>
+												<tr>
+													<td>Office Name: </td>
+													<td><input id="officeName"
+														name="officeName" type="text" style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>Office Phone: </td>
+													<td><input id="officePhone" name="officePhone"
+														type="text" style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>Office Fax: </td>
+													<td><input id="officeFax" name="officeFax" type="text"
+														style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>Office Address: </td>
+													<td><input id="officeAddress1" name="officeAddress1"
+														type="text" style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>Office Address: </td>
+													<td><input id="officeAddress2" name="officeAddress2"
+														type="text" style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>City: </td>
+													<td><input id="city" name="city" type="text"
+														style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr id="setupInputstateOrProvince">
+													<td>State/Province: </td>
+													<td><input id="state" name="state" type="text"
+														style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>ZIP/Postal Code: </td>
+													<td><input id="zip" name="zip" type="text"
+														style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>Contact Person:</td>
+													<td><input id="officeContactPerson" name="officeContactPerson" type="text"
+														style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+																				
+												<tr>
+													<td>Email Address: </td>
+													<td><input id="email" name="email" type="text"
+														style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>Country: </td>
+													<td><select id="country" class="required contactsDropdown" name="country" size="1" onchange="countryChanged()">
+															<option value="" selected="selected" disabled="disabled">(please select a country)</option>
+															<option value="AF">Afghanistan</option>
+															<option value="AL">Albania</option>
+															<option value="DZ">Algeria</option>
+															<option value="AS">American Samoa</option>
+															<option value="AD">Andorra</option>
+															<option value="AO">Angola</option>
+															<option value="AI">Anguilla</option>
+															<option value="AQ">Antarctica</option>
+															<option value="AG">Antigua and Barbuda</option>
+															<option value="AR">Argentina</option>
+															<option value="AM">Armenia</option>
+															<option value="AW">Aruba</option>
+															<option value="AU">Australia</option>
+															<option value="AT">Austria</option>
+															<option value="AZ">Azerbaijan</option>
+															<option value="BS">Bahamas</option>
+															<option value="BH">Bahrain</option>
+															<option value="BD">Bangladesh</option>
+															<option value="BB">Barbados</option>
+															<option value="BY">Belarus</option>
+															<option value="BE">Belgium</option>
+															<option value="BZ">Belize</option>
+															<option value="BJ">Benin</option>
+															<option value="BM">Bermuda</option>
+															<option value="BT">Bhutan</option>
+															<option value="BO">Bolivia</option>
+															<option value="BA">Bosnia and Herzegowina</option>
+															<option value="BW">Botswana</option>
+															<option value="BV">Bouvet Island</option>
+															<option value="BR">Brazil</option>
+															<option value="BN">Brunei Darussalam</option>
+															<option value="BG">Bulgaria</option>
+															<option value="BF">Burkina Faso</option>
+															<option value="BI">Burundi</option>
+															<option value="KH">Cambodia</option>
+															<option value="CM">Cameroon</option>
+															<option value="CA">Canada</option>
+															<option value="CV">Cape Verde</option>
+															<option value="KY">Cayman Islands</option>
+															<option value="CF">Central African Republic</option>
+															<option value="TD">Chad</option>
+															<option value="CL">Chile</option>
+															<option value="CN">China</option>
+															<option value="CX">Christmas Island</option>
+															<option value="CC">Cocos (Keeling) Islands</option>
+															<option value="CO">Colombia</option>
+															<option value="KM">Comoros</option>
+															<option value="CG">Congo</option>
+															<option value="CK">Cook Islands</option>
+															<option value="CR">Costa Rica</option>
+															<option value="CI">Cote d'Ivoire</option>
+															<option value="HR">Croatia (Hrvatska)</option>
+															<option value="CU">Cuba</option>
+															<option value="CY">Cyprus</option>
+															<option value="CZ">Czech Republic</option>
+															<option value="DK">Denmark</option>
+															<option value="DJ">Djibouti</option>
+															<option value="DM">Dominica</option>
+															<option value="DO">Dominican Republic</option>
+															<option value="TP">East Timor</option>
+															<option value="EC">Ecuador</option>
+															<option value="EG">Egypt</option>
+															<option value="SV">El Salvador</option>
+															<option value="GQ">Equatorial Guinea</option>
+															<option value="ER">Eritrea</option>
+															<option value="EE">Estonia</option>
+															<option value="ET">Ethiopia</option>
+															<option value="FK">Falkland Islands (Malvinas)</option>
+															<option value="FO">Faroe Islands</option>
+															<option value="FJ">Fiji</option>
+															<option value="FI">Finland</option>
+															<option value="FR">France</option>
+															<option value="FX">France, Metropolitan</option>
+															<option value="GF">French Guiana</option>
+															<option value="PF">French Polynesia</option>
+															<option value="TF">French Southern Territories</option>
+															<option value="GA">Gabon</option>
+															<option value="GM">Gambia</option>
+															<option value="GE">Georgia</option>
+															<option value="DE">Germany</option>
+															<option value="GH">Ghana</option>
+															<option value="GI">Gibraltar</option>
+															<option value="GR">Greece</option>
+															<option value="GL">Greenland</option>
+															<option value="GD">Grenada</option>
+															<option value="GP">Guadeloupe</option>
+															<option value="GU">Guam</option>
+															<option value="GT">Guatemala</option>
+															<option value="GN">Guinea</option>
+															<option value="GW">Guinea-Bissau</option>
+															<option value="GY">Guyana</option>
+															<option value="HT">Haiti</option>
+															<option value="HN">Honduras</option>
+															<option value="HK">Hong Kong</option>
+															<option value="HU">Hungary</option>
+															<option value="IS">Iceland</option>
+															<option value="IN">India</option>
+															<option value="ID">Indonesia</option>
+															<option value="IR">Iran (Islamic Republic of)</option>
+															<option value="IQ">Iraq</option>
+															<option value="IE">Ireland</option>
+															<option value="IL">Israel</option>
+															<option value="IT">Italy</option>
+															<option value="JM">Jamaica</option>
+															<option value="JP">Japan</option>
+															<option value="JO">Jordan</option>
+															<option value="KZ">Kazakhstan</option>
+															<option value="KE">Kenya</option>
+															<option value="KI">Kiribati</option>
+															<option value="KR">Korea, Republic of</option>
+															<option value="KW">Kuwait</option>
+															<option value="KG">Kyrgyzstan</option>
+															<option value="LV">Latvia</option>
+															<option value="LB">Lebanon</option>
+															<option value="LS">Lesotho</option>
+															<option value="LR">Liberia</option>
+															<option value="LY">Libyan Arab Jamahiriya</option>
+															<option value="LI">Liechtenstein</option>
+															<option value="LT">Lithuania</option>
+															<option value="LU">Luxembourg</option>
+															<option value="MO">Macau</option>
+															<option value="MG">Madagascar</option>
+															<option value="MW">Malawi</option>
+															<option value="MY">Malaysia</option>
+															<option value="MV">Maldives</option>
+															<option value="ML">Mali</option>
+															<option value="MT">Malta</option>
+															<option value="MH">Marshall Islands</option>
+															<option value="MQ">Martinique</option>
+															<option value="MR">Mauritania</option>
+															<option value="MU">Mauritius</option>
+															<option value="YT">Mayotte</option>
+															<option value="MX">Mexico</option>
+															<option value="MD">Moldova, Republic of</option>
+															<option value="MC">Monaco</option>
+															<option value="MN">Mongolia</option>
+															<option value="MS">Montserrat</option>
+															<option value="MA">Morocco</option>
+															<option value="MZ">Mozambique</option>
+															<option value="MM">Myanmar</option>
+															<option value="NA">Namibia</option>
+															<option value="NR">Nauru</option>
+															<option value="NP">Nepal</option>
+															<option value="NL">Netherlands</option>
+															<option value="AN">Netherlands Antilles</option>
+															<option value="NC">New Caledonia</option>
+															<option value="NZ">New Zealand</option>
+															<option value="NI">Nicaragua</option>
+															<option value="NE">Niger</option>
+															<option value="NG">Nigeria</option>
+															<option value="NU">Niue</option>
+															<option value="NF">Norfolk Island</option>
+															<option value="MP">Northern Mariana Islands</option>
+															<option value="NO">Norway</option>
+															<option value="OM">Oman</option>
+															<option value="PK">Pakistan</option>
+															<option value="PW">Palau</option>
+															<option value="PA">Panama</option>
+															<option value="PG">Papua New Guinea</option>
+															<option value="PY">Paraguay</option>
+															<option value="PE">Peru</option>
+															<option value="PH">Philippines</option>
+															<option value="PN">Pitcairn</option>
+															<option value="PL">Poland</option>
+															<option value="PT">Portugal</option>
+															<option value="PR">Puerto Rico</option>
+															<option value="QA">Qatar</option>
+															<option value="RE">Reunion</option>
+															<option value="RO">Romania</option>
+															<option value="RU">Russian Federation</option>
+															<option value="RW">Rwanda</option>
+															<option value="KN">Saint Kitts and Nevis</option>
+															<option value="LC">Saint LUCIA</option>
+															<option value="WS">Samoa</option>
+															<option value="SM">San Marino</option>
+															<option value="ST">Sao Tome and Principe</option>
+															<option value="SA">Saudi Arabia</option>
+															<option value="SN">Senegal</option>
+															<option value="SC">Seychelles</option>
+															<option value="SL">Sierra Leone</option>
+															<option value="SG">Singapore</option>
+															<option value="SK">Slovakia (Slovak Republic)</option>
+															<option value="SI">Slovenia</option>
+															<option value="SB">Solomon Islands</option>
+															<option value="SO">Somalia</option>
+															<option value="ZA">South Africa</option>
+															<option value="ES">Spain</option>
+															<option value="LK">Sri Lanka</option>
+															<option value="SH">St. Helena</option>
+															<option value="PM">St. Pierre and Miquelon</option>
+															<option value="SD">Sudan</option>
+															<option value="SR">Suriname</option>
+															<option value="SZ">Swaziland</option>
+															<option value="SE">Sweden</option>
+															<option value="CH">Switzerland</option>
+															<option value="SY">Syrian Arab Republic</option>
+															<option value="TW">Taiwan, Province of China</option>
+															<option value="TJ">Tajikistan</option>
+															<option value="TZ">Tanzania, United Republic of</option>
+															<option value="TH">Thailand</option>
+															<option value="TG">Togo</option>
+															<option value="TK">Tokelau</option>
+															<option value="TO">Tonga</option>
+															<option value="TT">Trinidad and Tobago</option>
+															<option value="TN">Tunisia</option>
+															<option value="TR">Turkey</option>
+															<option value="TM">Turkmenistan</option>
+															<option value="TC">Turks and Caicos Islands</option>
+															<option value="TV">Tuvalu</option>
+															<option value="UG">Uganda</option>
+															<option value="UA">Ukraine</option>
+															<option value="AE">United Arab Emirates</option>
+															<option value="GB">United Kingdom</option>
+															<option value="US">United States</option>
+															<option value="UY">Uruguay</option>
+															<option value="UZ">Uzbekistan</option>
+															<option value="VU">Vanuatu</option>
+															<option value="VE">Venezuela</option>
+															<option value="VN">Viet Nam</option>
+															<option value="VG">Virgin Islands (British)</option>
+															<option value="VI">Virgin Islands (U.S.)</option>
+															<option value="WF">Wallis and Futuna Islands</option>
+															<option value="EH">Western Sahara</option>
+															<option value="YE">Yemen</option>
+															<option value="ZM">Zambia</option>
+															<option value="ZW">Zimbabwe</option>
+													</select>
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td>Language: </td>
+													<td><select id="language" class="contactsDropdown" name="language" onchange="languageChanged()">
+															<option value="" selected="selected" disabled="disabled">(please select a language)</option>
+															<option value="eng">English</option>
+															<option value="fra">Français</option>
+															<option value="deu">Deutsch</option>
+															<option value="spa">Español</option>
+															<option value="ita">Italiano</option>
+															<option value="jpn">日本語</option>
+<!--															<option value="ces">Čeština</option> -->
+<!--															<option value="slk">Slovenčina‬</option> -->
+<!--															<option value="dan">Dansk</option> -->
+<!--															<option value="nld">Nederlands</option> -->
+<!--															<option value="nor">norsk</option> -->
+<!--															<option value="pol">polski</option> -->
+<!--															<option value="zho">中文(简体)</option> -->
+<!-- 															<option value="hun">magyar</option> -->
+<!-- 															<option value="rus">Русский</option> -->
+													</select>
+													</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr style="height: 0px"></tr>
+												<tr style="height: 0px"></tr>
+												<tr>
+													<td colspan="2">
+														<h2>Dealer</h2>
+													</td>
+													<td>&nbsp;</td>
+													<td colspan="2">
+														<h2>Sales Representative</h2>
+													</td>
+												</tr>
+												<tr>
+													<td>Name: </td>
+													<td><input id="dealerName" name="dealerName"
+														type="text" style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+													<td>Name: </td>
+													<td><input id="salesRepName" name="salesRepName"
+														type="text" style="width: 140px" />
+													</td>
+												</tr>
+												<tr>
+													<td>Phone 1: </td>
+													<td><input id="dealerPhone1" name="dealerPhone1"
+														type="text" style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+													<td>Phone 1: </td>
+													<td><input id="salesRepPhone1" name="salesRepPhone1"
+														type="text" style="width: 140px" />
+													</td>
+												</tr>
+												<tr>
+													<td>Phone 2: </td>
+													<td><input id="dealerPhone2" name="dealerPhone2"
+														type="text" style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+													<td>Phone 2: </td>
+													<td><input id="salesRepPhone2" name="salesRepPhone2"
+														type="text" style="width: 140px" />
+													</td>
+												</tr>
+												<tr>
+													<td>Email: </td>
+													<td><input id="dealerEmail" name="dealerEmail"
+														type="text" style="width: 140px" />
+													</td>
+													<td>&nbsp;</td>
+													<td>Email: </td>
+													<td><input id="salesRepEmail" name="salesRepEmail"
+														type="text" style="width: 140px" />
+													</td>
+												</tr>
+												<tr>
+													<td>ID: </td>
+													<td><input id="dealerId" name="dealerId"
+														type="text" style="width: 140px" maxlength="6" onblur="this.value = this.value.replace(/[^\d]/g, '');"/>
+													</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+												</tr>
+												<tr>
+													<td colspan="5">&nbsp;</td>
+												</tr>
+												<tr>
+													<td colspan="2" id="privacy-tos-box">I agree to the SciCan&nbsp;<a href="http://www.scicancanada.ca/index.cfm?pagepath=Terms_of_Use&id=62364&portal" target="_blank" rel="noopener noreferrer" id="linkTos">Terms of Use</a>&nbsp;and&nbsp;<a href="http://www.scicancanada.ca/index.cfm?pagepath=Privacy&id=16177&portal" target="_blank" id="linkPrivacy">Privacy Policy</a>:</td>
+													<td><input id="promo" name="promo" type="checkbox" onclick="onClickPrivacy()" /></td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+												</tr>
+											</tbody>
+										</table>
+										<div style="text-align: center">
+											<br />
+											<input type="button" class="button"
+												onclick="if($('#contactsForm').valid()) submitContact()"
+												value="Save" />
+										</div>
+										<div>
+											<input type="hidden" name="modelNum" value="" />
+											<input type="hidden" name="unitType" value="" />
+											<input type="hidden" name="registrationKey" value="" />
+											<input type="hidden" name="serialNum" value="" />
+										</div>
+									</fieldset>
+								</form>
+							</div>
+							<div id="lan" style="display: none;">
+								<form id="lanForm">
+									<h1>LAN</h1>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td>Device Name: </td>
+												<td><input id="deviceName" name="deviceName"
+													type="text" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td colspan="3"><br /></td>
+											</tr>
+											<tr>
+												<td width="22%">Automatic IP: </td>
+												<td width="25%"><input id="autoIP" name="autoIP"
+													type="checkbox" onclick="onClickLanAutoIp()" />
+												</td>
+												<td width="53%">&nbsp;</td>
+											</tr>
+											<tr class="cIpSettings">
+												<td>IP Address: </td>
+												<td><input id="ipAddress" name="ipAddress" type="text" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr class="cIpSettings">
+												<td>Network Mask: </td>
+												<td><input id="netmask" name="netmask" type="text" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr class="cIpSettings">
+												<td>Default Gateway: </td>
+												<td><input id="gateway" name="gateway" type="text" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr class="cIpSettings">
+												<td>DNS Server: </td>
+												<td><input id="dns" name="dns" type="text" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">&nbsp;</td>
+												<td width="78%"><input class="button" type="button"
+													value="Save"
+													onclick="if($('#lanForm').valid()) submitLAN()" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+							<div id="remote" style="display: none;">
+								<form id="remoteForm">
+									<h1>Remote</h1>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">&nbsp;</td>
+												<td width="25%"><select id="preset"
+													onchange="doPreset()">
+														<option value="none">Select…</option>
+														<option value="gmail">Gmail</option>
+														<option value="yahoo">Yahoo! Mail</option>
+														<option value="msn">Windows Live Hotmail</option>
+														<option value="gmx">GMX Mail</option>
+												</select>
+												</td>
+												<td width="53%"></td>
+											</tr>
+											<tr>
+												<td>SMTP Server: </td>
+												<td><input id="smtpServer" name="smtpServer"
+													type="text" class="inputs-remote" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Port: </td>
+												<td><input id="port" name="port" type="text" class="inputs-remote" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>SSL/TLS: </td>
+												<td><input id="ssl" name="ssl" type="checkbox" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Use Authentication: </td>
+												<td><input id="useAuth" name="useAuth" type="checkbox" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td class="helpTableCellToCenter">
+													<div class="helpToRight qtip-html-attached" id="usernameLabel">
+														<span class="helpToRight">Username: </span><span class="helpToRight ui-icon ui-icon-info"></span>
+													</div>
+													<div id="usernameLabel-qtip-html-attachment" class="hideme">
+														Example: username@gmail.com or username
+													</div>
+												</td>
+												<td><input id="username" name="username" type="text" class="inputs-remote" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Password: </td>
+												<td><input id="remotePassword" name="remotePassword"
+													type="password" class="inputs-remote" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">&nbsp;</td>
+												<td width="78%">
+												<input id="buttonTestRemote" value="Test"
+													type="button" class="button"
+													onclick="if($('#remoteForm').valid()) submitRemote(true)" />
+												<input value="Save" type="button" class="button"
+													onclick="if($('#remoteForm').valid()) submitRemote(false)" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+							<div id="notifications" style="display: none;">
+								<form id="notificationsForm">
+									<h1>Notifications</h1>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">&nbsp;</td>
+												<td width="25%">&nbsp;</td>
+												<td width="6%">&nbsp;</td>
+												<td width="22%" class="helpTableCellToCenter">
+													<div class="helpToRight qtip-html-attached" id="recordsLabel">
+														<span class="helpToRight">Records</span><span class="helpToRight ui-icon ui-icon-info"></span>
+													</div>
+													<div id="recordsLabel-qtip-html-attachment" class="hideme">
+														<b>All</b><br/>
+														Receive emails for every cycle,<br/>
+End of Sterilization and<br/>
+Maintenance notifications.<br/>
+														<br/>
+														<b>Cycle Fault (CF)</b><br/>
+														Receive emails only for cycle faults and<br/>
+Maintenance notifications.
+													</div>
+												</td>
+												<td width="25%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Office Email: </td>
+												<td><input id="officeEmail" disabled="disabled"
+													readonly="readonly" type="text" />
+												</td>
+												<td>&nbsp;</td>
+												<td>
+													<div id="">
+														<input type="checkbox" id="emailAll" name="emailAll"
+															class="emailCheck" /><label for="emailAll">All</label>
+														<input type="checkbox" id="emailCF" name="emailCF"
+															class="emailCheck" /><label for="emailCF">CF</label>
+													</div>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>To: </td>
+												<td><input id="to1" name="to1" type="text" />
+												</td>
+												<td>&nbsp;</td>
+												<td>
+													<div>
+														<input type="checkbox" id="to1All" name="to1All"
+															class="to1Check" /><label for="to1All">All</label>
+														<input type="checkbox" id="to1CF" name="to1CF"
+															class="to1Check" /><label for="to1CF">CF</label>
+													</div>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>To: </td>
+												<td><input id="to2" name="to2" type="text" />
+												</td>
+												<td>&nbsp;</td>
+												<td>
+													<div>
+														<input type="checkbox" id="to2All" name="to2All"
+															class="to2Check" /><label for="to2All">All</label>
+														<input type="checkbox" id="to2CF" name="to2CF"
+															class="to2Check" /><label for="to2CF">CF</label>
+													</div>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>CC: </td>
+												<td><input id="cc1" name="cc1" type="text" />
+												</td>
+												<td>&nbsp;</td>
+												<td>
+													<div id="">
+														<input type="checkbox" id="cc1All" name="cc1All"
+															class="cc1Check" /><label for="cc1All">All</label>
+														<input type="checkbox" id="cc1CF" name="cc1CF"
+															class="cc1Check" /><label for="cc1CF">CF</label>
+													</div>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>CC: </td>
+												<td><input id="cc2" name="cc2" type="text" />
+												</td>
+												<td>&nbsp;</td>
+												<td>
+													<div id="">
+														<input type="checkbox" id="cc2All" name="cc2All"
+															class="cc2Check" /><label for="cc2All">All</label>
+														<input type="checkbox" id="cc2CF" name="cc2CF"
+															class="cc2Check" /><label for="cc2CF">CF</label>
+													</div>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td colspan="3" class="tableTextToButtonPadding"><input id="buttonTestNotif" value="Confirm Email"
+													type="button" class="button"
+													onclick="if($('#notificationsForm').valid()) submitNotification(true)" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td class="tableSectionToSectionPadding">SciCan Service: </td>
+												<td><input id="service" name="service"
+													disabled="disabled" readonly="readonly" type="text"
+													value="" />
+												</td>
+												<td>&nbsp;</td>
+												<td>
+													<div id="">
+														<input type="checkbox" id="serviceAll" name="serviceAll"
+															class="serviceCheck" disabled="disabled" /><label for="serviceAll">All</label>
+														<input type="checkbox" id="serviceCF" name="serviceCF"
+															class="serviceCheck" disabled="disabled" /><label for="serviceCF">CF</label>
+													</div>
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Email Subject: </td>
+												<td colspan="3">
+													<input id="subject" name="subject" type="text" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td class="tableVerticalAlignTop">Message Body: </td>
+												<td colspan="3">
+													<textarea id="body" name="body" rows="4" cols="60"></textarea>
+												</td>
+												<td>&nbsp;</td>
+											</tr>											
+											
+<!-- 											<tr>
+												<td colspan="3">Message Body: </td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td colspan="4">
+													<textarea id="body" name="body" rows="4" cols="60"></textarea>
+												</td>
+												<td>&nbsp;</td>
+											</tr> -->
+										</tbody>
+									</table>
+									<div class="singleLineSep"></div>
+									<h6>End of Sterilization Notification</h6>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="30%">Enable: </td>
+												<td width="25%">
+													<input id="endOfSteri" name="endOfSteri" type="checkbox" />
+												</td>
+												<td width="15%">&nbsp;</td>
+												<td width="30%">&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<h6>Advanced notifications settings</h6>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="30%">Enable: </td>
+												<td width="25%">
+													<input id="emailUseUserSettings" name="emailUseUserSettings" type="checkbox" />
+												</td>
+												<td width="15%">&nbsp;</td>
+												<td width="30%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td colspan="3" class="tableTextToButtonPadding">
+													<input value="Save" type="button" class="button" onclick="if($('#notificationsForm').valid()) submitNotification(false)" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+								<form id="maintForm">
+									<h2>Maintenance Notification</h2>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="30%">Enable: </td>
+												<td width="25%"><input id="maintNotif" name="maintNotif" type="checkbox" />
+												</td>
+												<td width="15%">&nbsp;</td>
+												<td width="30%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>After number of cycles: </td>
+												<td><select id="maintNotifCycles" name="maintNotifCycles">
+														<option value="500">500</option>
+														<option value="1000">1000</option>
+														<option value="1500">1500</option>
+														<option value="2000">2000</option>
+														<option value="2500">2500</option>
+														<option value="3000">3000</option>
+												</select>
+												</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>After number of months: </td>
+												<td><select id="maintNotifPeriod" name="maintNotifPeriod">
+														<option value="1">1 month</option>
+														<option value="2">2 months</option>
+														<option value="3">3 months</option>
+														<option value="4">4 months</option>
+														<option value="5">5 months</option>
+														<option value="6">6 months</option>
+														<option value="7">7 months</option>
+														<option value="8">8 months</option>
+														<option value="9">9 months</option>
+														<option value="10">10 months</option>
+														<option value="11">11 months</option>
+														<option value="12">12 months</option>
+														<option value="18">18 months</option>
+														<option value="24">24 months</option>
+												</select>
+												</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<h6 style="padding-top:0.5em; padding-bottom:0.25em">Upcoming Maintenance Notification</h6>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="30%">Cycle: </td>
+												<td width="25%"><input id="maintTriggerCycles" name="maintTriggerCycles" type="text" readonly="readonly" disabled="disabled" />
+												</td>
+												<td width="15%">&nbsp;</td>
+												<td width="30%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Date: </td>
+												<td><input id="maintScheduled" name="maintScheduled" type="text" readonly="readonly" disabled="disabled" />
+												</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td style="width:30%">&nbsp;</td>
+												<td style="width:70%">
+													<input value="Reset Maintenance" type="button" class="button" 
+														onclick="resetMaint()" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+							<div id="time" style="display: none">
+								<form id="timeForm">
+									<h1>Time</h1>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%"><div id="timeUpdateLabel">Enable Update: </div></td>
+												<td width="25%"><input id="timeUpdate"
+													name="timeUpdate" type="checkbox" />
+												</td>
+												<td width="60%">&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">Time Zone: </td>
+												<td><select name="timezone" id="timezone">
+														<option selected="selected">(please select a time zone)</option>
+														<option value="GMT-12.0 Pacific/Wake">(GMT-12:00) International Date Line West</option> 
+														<option value="GMT-11.0 Pacific/Apia">(GMT-11:00) Midway Island, Samoa</option>
+														<option value="GMT-10.0 Pacific/Honolulu">(GMT-10:00) Hawaii</option>
+														<option value="GMT-9.0 America/Anchorage">(GMT-09:00) Alaska</option>
+														<option value="GMT-8.0 America/Los_Angeles">(GMT-08:00) Pacific Time (US and Canada); Tijuana</option>
+														<option value="GMT-7.0 America/Phoenix">(GMT-07:00) Mountain Time(US) Arizona</option>
+														<option value="GMT-7.0 America/Denver">(GMT-07:00) Mountain Time (US and Canada)</option>
+														<option value="GMT-7.0 America/Chihuahua">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+														<option value="GMT-6.0 America/Regina">(GMT-06:00) (Canada) Saskatchewan</option>
+														<option value="GMT-6.0 America/Chicago">(GMT-06:00) Central Time (US and Canada)</option>
+														<option value="GMT-6.0 America/Managua">(GMT-06:00) Central America</option>
+														<option value="GMT-6.0 America/Mexico_City">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
+														<option value="GMT-5.0 America/New_York">(GMT-05:00) Eastern Time (US and Canada)</option>
+														<option value="GMT-5.0 America/Bogota">(GMT-05:00) Bogota, Lima, Quito</option>
+														<option value="GMT-5.0 America/Indiana/Knox">(GMT-05:00) Eastern Time (US) Indiana</option>
+														<option value="GMT-4.0 America/Halifax">(GMT-04:00) Atlantic Time (Canada)</option>
+														<option value="GMT-4.0 America/Manaus">(GMT-04:00) Central Brazil, Manaus</option>
+														<option value="GMT-4.0 America/Cuiaba">(GMT-04:00) Central Brazil, Cuiaba</option>
+														<option value="GMT-4.0 America/Santiago">(GMT-04:00) Santiago</option>
+														<option value="GMT-4.0 America/Caracas">(GMT-04:00) Caracas, La Paz</option>
+														<option value="GMT-3.5 America/St_Johns">(GMT-03:30) Newfoundland and Labrador</option>
+														<option value="GMT-3.0 America/Sao_Paulo">(GMT-03:00) Brasilia, Sao Paulo</option>
+														<option value="GMT-3.0 America/Godthab">(GMT-03:00) Greenland</option>
+														<option value="GMT-3.0 America/Argentina/Salta">(GMT-03:00) Buenos Aires, Georgetown</option>
+														<option value="GMT-2.0 America/Noronha">(GMT-02:00) Mid-Atlantic</option>
+														<option value="GMT-1.0 Atlantic/Azores">(GMT-01:00) Azores</option>
+														<option value="GMT-1.0 Atlantic/Cape_Verde">(GMT-01:00) Cape Verde Islands</option>
+														<option value="GMT+0.0 Europe/London">(GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+														<option value="GMT+0.0 Africa/Casablanca">(GMT) Casablanca, Monrovia</option>
+														<option value="GMT+1.0 Europe/Belgrade">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+														<option value="GMT+1.0 Europe/Sarajevo">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+														<option value="GMT+1.0 Europe/Paris">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+														<option value="GMT+1.0 Africa/Lagos">(GMT+01:00) West Central Africa</option>
+														<option value="GMT+1.0 Europe/Berlin">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+														<option value="GMT+2.0 Europe/Sofia">(GMT+02:00) Bulgaria, Sofia</option>
+														<option value="GMT+2.0 Africa/Cairo">(GMT+02:00) Cairo</option>
+														<option value="GMT+2.0 Europe/Helsinki">(GMT+02:00) Helsinki, Kiev, Riga, Tallinn, Vilnius</option>
+														<option value="GMT+2.0 Europe/Istanbul">(GMT+02:00) Athens, Bucharest, Istanbul</option>
+														<option value="GMT+2.0 Asia/Jerusalem">(GMT+02:00) Jerusalem</option>
+														<option value="GMT+2.0 Africa/Johannesburg">(GMT+02:00) Windhoek, Harare, Pretoria</option>
+														<option value="GMT+3.0 Asia/Riyadh">(GMT+03:00) Kuwait, Riyadh</option>
+														<option value="GMT+3.0 Asia/Baghdad">(GMT+03:00) Baghdad</option>
+														<option value="GMT+3.0 Africa/Nairobi">(GMT+03:00) Nairobi</option>
+														<option value="GMT+3.0 Europe/Moscow">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
+														<option value="GMT+3.5 Asia/Tehran">(GMT+03:30) Tehran</option>
+														<option value="GMT+4.0 Asia/Muscat">(GMT+04:00) Abu Dhabi, Muscat</option>
+														<option value="GMT+4.0 Asia/Tbilisi">(GMT+04:00) Baku, Yerevan, Tbilisi</option>
+														<option value="GMT+4.5 Asia/Kabul">(GMT+04:30) Kabul</option>
+														<option value="GMT+5.0 Asia/Yekaterinburg">(GMT+05:00) Ekaterinburg</option>
+														<option value="GMT+5.0 Asia/Karachi">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
+														<option value="GMT+5.5 Asia/Calcutta">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+														<option value="GMT+5.75 Asia/Katmandu">(GMT+05:45) Kathmandu</option>
+														<option value="GMT+6.0 Asia/Dhaka">(GMT+06:00) Astana, Dhaka</option>
+														<option value="GMT+6.0 Asia/Novosibirsk">(GMT+06:00) Almaty, Novosibirsk</option>
+														<option value="GMT+6.0 Asia/Colombo">(GMT+06:00) Sri Jayawardenepura</option>
+														<option value="GMT+6.5 Asia/Rangoon">(GMT+06:30) Yangon (Rangoon)</option>
+														<option value="GMT+7.0 Asia/Krasnoyarsk">(GMT+07:00) Krasnoyarsk</option>
+														<option value="GMT+7.0 Asia/Bangkok">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+														<option value="GMT+8.0 Asia/Hong_Kong">(GMT+08:00) Beijing, Chongqing, Hong Kong SAR, Urumqi</option>
+														<option value="GMT+8.0 Asia/Irkutsk">(GMT+08:00) Irkutsk, Ulaanbaatar</option>
+														<option value="GMT+8.0 Asia/Singapore">(GMT+08:00) Kuala Lumpur, Singapore</option>
+														<option value="GMT+8.0 Asia/Taipei">(GMT+08:00) Taipei</option>
+														<option value="GMT+8.0 Australia/Perth">(GMT+08:00) Perth</option>
+														<option value="GMT+9.0 Asia/Seoul">(GMT+09:00) Seoul</option>
+														<option value="GMT+9.0 Asia/Tokyo">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
+														<option value="GMT+9.0 Asia/Yakutsk">(GMT+09:00) Yakutsk</option>
+														<option value="GMT+9.5 Australia/Darwin">(GMT+09:30) Darwin</option>
+														<option value="GMT+9.5 Australia/Adelaide">(GMT+09:30) Adelaide</option>
+														<option value="GMT+10.0 Australia/Sydney">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+														<option value="GMT+10.0 Australia/Brisbane">(GMT+10:00) Brisbane</option>
+														<option value="GMT+10.0 Australia/Hobart">(GMT+10:00) Hobart</option>
+														<option value="GMT+10.0 Asia/Vladivostok">(GMT+10:00) Vladivostok</option>
+														<option value="GMT+10.0 Pacific/Guam">(GMT+10:00) Guam, Port Moresby</option>
+														<option value="GMT+11.0 Asia/Magadan">(GMT+11:00) Magadan, Solomon Islands, New Caledonia</option>
+														<option value="GMT+12.0 Pacific/Fiji">(GMT+12:00) Fiji Islands, Kamchatka, Marshall Islands</option>
+														<option value="GMT+12.0 Pacific/Auckland">(GMT+12:00) Auckland, Wellington</option>
+														<option value="GMT+13.0 Pacific/Tongatapu">(GMT+13:00) Nuku'alofa</option>
+												</select>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">DST On/Off: </td>
+												<td width="25%"><input id="timeDST"
+													name="timeDST" type="checkbox" />
+												</td>
+												<td width="53%">&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td style="width:22%">&nbsp;</td>
+												<td style="width:78%">
+													<input value="Save" type="button" class="button" onclick="submitTime()" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+								<form id="timeSetForm">
+									<h2>Manual Setup</h2>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">Time: </td>
+												<td width="25%"><input id="hours" name="hours" type="text" size="2"
+													value="HH" />:<input id="minutes" name="minutes"
+													type="text" size="2" value="MM" />:<input
+													id="seconds" name="seconds" type="text" size="2" value="SS" />
+												</td>
+												<td width="53%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Date: </td>
+												<td><input id="datepicker" name="datepicker"
+													type="text" size="15" value="" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td style="width:22%">&nbsp;</td>
+												<td style="width:78%">
+													<input value="Set time" type="button" class="button" onclick="if($('#timeForm').valid()) updateTime()" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+							<div id="password" style="display: none;">
+								<form id="passwordForm">
+									<h1>Setup Password</h1>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">Current Password: </td>
+												<td width="25%"><input id="oldPassword"
+													name="oldPassword" type="password" />
+												</td>
+												<td width="53%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>New Password: </td>
+												<td><input id="newPassword1" name="newPassword1"
+													type="password" />
+												</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Confirm: </td>
+												<td><input id="newPassword2" name="newPassword2"
+													type="password" />
+												</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">&nbsp;</td>
+												<td width="78%"><input value="Save" type="button" class="button"
+													onclick="if($('#passwordForm').valid()) submitPassword()" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+								<div class="singleLineSep"></div>
+								<form id="localControlPasswordForm">
+									<h1>Local Control Password</h1>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">Current Password: </td>
+												<td width="25%"><input id="oldLCPassword"
+													name="oldLCPassword" type="password" />
+												</td>
+												<td width="53%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>New Password: </td>
+												<td><input id="newLCPassword1" name="newLCPassword1"
+													type="password" />
+												</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Confirm: </td>
+												<td><input id="newLCPassword2" name="newLCPassword2"
+													type="password" />
+												</td>
+												<td>&nbsp;</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">&nbsp;</td>
+												<td width="78%"><input value="Save" type="button" class="button"
+													onclick="if($('#localControlPasswordForm').valid()) submitLCPassword()" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>								
+							</div>
+							<div id="backup" style="display: none;">
+								<form id="backupForm">
+									<h1>Backup/Restore Web Settings</h1>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">Backup: </td>
+												<td width="25%">
+													<a class="qtip-html-attached" id="backupDownloadSettings" href="data/backup.cgi?"+ (newDate()).getTime()>Download settings...</a>
+													<div id="backupDownloadSettings-qtip-html-attachment" class="hideme" data-qtip-my="left center" data-qtip-at="right center" data-qtip-delay="5000">&nbsp;</div>
+												</td>
+												<td width="53%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Restore: </td>
+												<td>
+													<input id="restore" name="restore" type="file" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+												<td>
+													<input value="Restore" class="button" type="button"
+														onclick="restoreSettings()" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<div><input value="Factory Defaults"
+											type="button" class="button" onclick="factoryDefaults()" />
+									</div>
+								</form>
+							</div>
+							<div id="updates" style="display: none">
+								<form id="updatesForm">
+									<h1>Updates</h1>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">Interface Revision: </td>
+												<td width="25%"><input id="revision" name="revision"
+													type="text" readonly="readonly" disabled="disabled" />
+												</td>
+												<td width="53%">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>Automatic Interface Update: </td>
+												<td><input id="autoUpdate" name="autoUpdate"
+													type="checkbox" />
+												</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td width="22%">&nbsp;</td>
+												<td width="78%">
+													<input value="Save" type="button" class="button"
+														onclick="submitUpdates()" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr  class="hideme">
+												<td width="22%">null</td>
+												<td width="78%">
+													<input id="manualInterface" name="manualInterface"
+														type="file" />
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<br />
+									<table width="100%">
+										<tbody>
+											<tr  class="hideme">
+												<td width="22%">&nbsp;</td>
+												<td width="78%">
+													<input value="null"
+														class="button" type="button" onclick="updateFirmware()" />
+												</td>
+											</tr>
+										</tbody>
+									</table>		
+								</form>
+							</div>
+							<div id="tools" style="display: none;">
+								<h1>Tools</h1>
+								<div id="tabs">
+									<ul>
+										<li><a href="#remoteControlTab"><h7>
+													<b>Local control</b>
+												</h7> </a>
+										</li>
+										<li><a href="#remoteAccessTab"><h7>
+													<b>Remote access</b>
+												</h7> </a></li>
+										<li><a href="#networkTestTab"><h7>
+													<b>Network Test</b>
+												</h7> </a>
+										</li>
+										<li><a href="#repairLogTab"><h7>
+													<b>Service Log</b>
+												</h7> </a>
+										</li>
+									</ul>
+									<div id="remoteControlTab">
+										<p>View and control your STATCLAVE LCD within the office network.</p>
+										<input value="Start" type="button" class="button" onclick="window.open('remote.html');" />
+									</div>
+									<div id="remoteAccessTab">
+										<p>Authorize an outside person to view and control your web portal and STATCLAVE LCD.</p>
+										<input id="remoteAccessBtn" value="Start" type="button" class="button" onclick="remoteAccess();" />
+										<div id="remoteAccessUrl"></div>
+										<div id="remoteAccessToken"></div>
+									</div>
+									<div id="networkTestTab">
+										<p>Simple test to confirm cable and network connectivity.</p>
+										<input value="Test" type="button" class="button" onclick="startTest()" />
+										<div id="networkTestResults" style="display:none">
+											<br/>
+											<tt id="test" name="test"></tt>
+										</div>
+									</div>
+									<div id="repairLogTab">
+										<form id="repairForm">
+											<p>View your STATCLAVE service history or add new entries.</p>
+<!-- 											<h2>Service Log</h2> -->
+											<div id="repairLog"></div>
+											<input type="button" class="button" value="Email Service Log" onclick="emailRepairLog()" />
+											<h2>New entry</h2>
+											<table>
+												<tr>
+													<td style="vertical-align: top;">Date: </td>
+													<td><input id="datepicker2" name="datepicker2" type="text" size="15" value="" readonly="readonly" /></td>
+												</tr>
+												<tr>
+													<td style="vertical-align: top;">Description:</td>
+													<td><textarea cols="60" rows="3" name="newRepair" id="newRepair" style="max-height: 60px; max-width: 500px;"></textarea><br /></td>
+												</tr>
+												<tr>
+													<td><br /></td>
+												</tr>
+												<tr>
+													<td>&nbsp;</td>
+													<td><input value="Add new entry" type="button" class="button" onclick="if($('#repairForm').valid()) addNewRepairRecord()" /></td>
+												</tr>
+											</table>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+			<div>
+				<img id="ticker_btm_grey" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" />
+			</div>
+			<div id="footer"></div>
+		</div>
+	</div>
+	<div id="dialog-save-remind" title="" style="display:none"></div>
+	<div class="modal"></div>
+	<div style="display:none">
+		<img src="images/ajax-loader-2.gif" />
+	</div>
+</body>
+</html>
