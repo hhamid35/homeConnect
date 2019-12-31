@@ -1,0 +1,40 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:a="http://ajax.org/2005/aml">
+<head>
+<title>SciCan</title>
+
+<script src="js/loadjscssfile.js" type="text/javascript"></script>
+<script src="js/g4_06l.js" type="text/javascript"></script>
+
+<link rel="icon" href="images/favicon.gif" type="image/x-icon" />
+
+<script type="text/javascript">
+	$(window).resize(function() {
+		//console.log("Height: " + $(window).height() + "<br />Width: " + $(window).width());
+		$('#placeholder').css('height', $(window).height() - 220 + "px");
+		$('#placeholder').css('width', $(window).width() - 40 + "px");
+	});
+</script>
+
+</head>
+<body>
+	<div id='scican-hdr'>
+		<div id="scican-hdr-main">
+			<div id="scican-hdr-wrap">
+				<img id="logoImage" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="" />
+				<div id="" style="float: right; text-align: right;"></div>
+			</div>
+		</div>
+	</div>
+
+	<div style="padding: 20px;">
+		<p id="cycleStatus" style="font-size: 20px;"></p>
+		<p id="cycleDate" style="font-size: 20px;"></p>
+	</div>
+
+	<div id="placeholder"
+		style="margin-left: auto; margin-right: auto; height: 300px; width: 400px;"></div>
+
+</body>
+</html>
