@@ -51,7 +51,7 @@
     padding: 20px 10px;
 }
 
-.body .availUnits {
+.body .availDevices {
     overflow: hidden;
     align-content: center;
     float: left;
@@ -59,7 +59,7 @@
     padding: 20px;
 }
 
-.body .availUnits input[type=button], input[type=submit] {
+.body .availDevices input[type=button], input[type=submit] {
     margin: 18px;
     padding:5px 15px; 
     background:#ccc; 
@@ -69,12 +69,12 @@
     border-radius: 5px; 
 }
 
-.body .availUnits input:hover {
+.body .availDevices input:hover {
     background-color: #ddd;
     color: black;
 }
 
-.body .availUnits .unitsEnumerate {
+.body .availDevices .devicesEnumerate {
     overflow:auto;
     width: 250px;
     height: 400px;
@@ -87,7 +87,7 @@
     padding:10px;
 }
 
-.body .unit {
+.body .device {
     float: right;
     padding: 20px;
     text-align: center;

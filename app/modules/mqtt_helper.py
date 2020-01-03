@@ -29,7 +29,7 @@ class MqttHelper(mqtt.Client):
 
         rc = 0
         while rc == 0:
-            rc = self.loop()
+            rc = self.loop_start()
         return rc
 
     def subscribe(self, topic, subscription_handler, qos=0):
