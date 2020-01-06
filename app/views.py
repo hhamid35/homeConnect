@@ -12,45 +12,37 @@ def index():
 
 @app.route('/getDevices', methods=['GET'])
 def get_devices():
-    response = {
-        'devices': [
-            {
-                'name': 'esp8266_1',
-                'board': 'esp8266',
-                'action_type': 'switch'
-            },
-            {
-                'name': 'esp8266_2',
-                'board': 'esp8266',
-                'action_type': 'switch'
-            },
-            {
-                'name': 'esp8266_3',
-                'board': 'esp8266',
-                'action_type': 'switch'
-            },
-            {
-                'name': 'esp8266_4',
-                'board': 'esp8266',
-                'action_type': 'switch'
-            },
-            {
-                'name': 'esp8266_5',
-                'board': 'esp8266',
-                'action_type': 'switch'
-            }
-        ]
-    }
-    return json.dumps(response['devices'])
+    devices = [
+        {
+            'name': 'esp8266_1',
+            'ip_address': '192.168.0.1'
+        },
+        {
+            'name': 'esp8266_2',
+            'ip_address': '192.168.0.2'
+        },
+        {
+            'name': 'esp8266_3',
+            'ip_address': '192.168.0.3'
+        }
+    ]
+    return json.dumps(devices)
 
 
 @app.route('/getDeviceInfo', methods=['GET'])
 def get_device_info():
-    return 'not implemented'
+    device_info = {
+        'name': 'esp8266_1',
+        'ip_address': '192.168.0.1',
+        'status': 'unregistered',
+        'device_type': 'switch'
+    }
+    return json.dumps(device_info)
 
 
-@app.route('/registerDevice')
+@app.route('/registerDevice', methods=['POST'])
 def register_device():
+    print('got here')
     return 'not implemented'
 
 
