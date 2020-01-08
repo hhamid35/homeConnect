@@ -1,3 +1,20 @@
+function registerDeviceSuccess(data) {
+
+}
+
+function registerDevice() {
+    $.ajax({
+        url: "/registerDevice",
+        method: "POST",
+        dataType: "json",
+        data: { name: document.getElementById("deviceName").innerHTML, ip_address: document.getElementById("deviceIP").innerHTML, status: document.getElementById("deviceStatus").innerHTML, type: document.getElementById("deviceType"), topic: document.getElementById("topic_field").value },
+        success: registerDeviceSuccess,
+        error: function(xhr, textStatus, errorThrown) {
+           document.getElementById("devicesDiscovery").innerHTML = "<br><br><span>Please Try Again In A Few Moments</span><br><br>";
+    });
+}
+
+
 function getDeviceInfoSuccess(data) {
     document.getElementById("selectedDevice").innerHTML = " ";
     document.getElementById("selectedDevice").innerHTML += "<div id='deviceInfo'>";
@@ -6,17 +23,12 @@ function getDeviceInfoSuccess(data) {
     document.getElementById("selectedDevice").innerHTML += "<p><b>Device Status: </b><span id='deviceStatus'>" + data.status + "</span></p>";
     document.getElementById("selectedDevice").innerHTML += "<p><b>Device Type: </b><span id='deviceType'>" + data.device_type + "</span></p></div>";
     if ("unregistered".localeCompare(data.status) == 0) {
-        document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><form id='registerForm' action='/registerDevice' method='POST'>";
-        document.getElementById("selectedDevice").innerHTML += "<label>Topic:</label>";
-        document.getElementById("selectedDevice").innerHTML += "<input type='text' name='topic'><br>";
-        document.getElementById("selectedDevice").innerHTML += "<input type='submit' value='Register'>";
-        document.getElementById("selectedDevice").innerHTML += "</form></div>";
+        document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><label>Topic:</label><input type='text' placeholder='Type something...' id='topic_field'><br><input type='button' value='Register' onClick='registerDevice()'></div>";
 
+        // document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><form id='registerForm' action='/registerDevice' method='POST'><label>Topic:</label><input type='text' name='topic'><br><input type='submit' value='Register'></form></div>";
     }
     else {
-        document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'>";
-        document.getElementById("selectedDevice").innerHTML += "<input type='button' value='Unregister' onClick='unregister()'>";
-        document.getElementById("selectedDevice").innerHTML += "</div>";
+        document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><input type='button' value='Unregister' onClick='unregisterDevice()'></div>";
     }
 }
 

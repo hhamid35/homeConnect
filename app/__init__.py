@@ -12,5 +12,6 @@ mqttc = mqtt.Client()
 mqttc.connect('localhost', 1883, 60)
 mqttc.loop_start()
 
-from app import views, models
+from app import views, models, forms
+
 

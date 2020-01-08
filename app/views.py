@@ -1,7 +1,8 @@
 from flask import render_template, request, url_for
-from wtforms import TextAreaField
 from app import app, db, mqttc
+from .forms import RegisterForm
 import json
+
 
 
 @app.route('/')
@@ -44,8 +45,8 @@ def get_device_info():
 @app.route('/registerDevice', methods=['POST', 'GET'])
 def register_device():
     print(request.method)
-    result = request.form.get('topic')
-    print(result)
+    result = request.json
+    return result
 
 
 @app.route('/unregisterDevice')
