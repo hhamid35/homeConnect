@@ -1,4 +1,4 @@
-from flask import render_template, request, url_for
+from flask import render_template, request, url_for, jsonify
 from app import app, db, mqttc
 from .forms import RegisterForm
 import json
@@ -42,11 +42,12 @@ def get_device_info():
     return json.dumps(device_info)
 
 
-@app.route('/registerDevice', methods=['POST', 'GET'])
+@app.route('/registerDevice', methods=['POST'])
 def register_device():
     print(request.method)
-    result = request.json
-    return result
+    result = request.get_json()
+    print(result)
+    return 'submitted'
 
 
 @app.route('/unregisterDevice')
