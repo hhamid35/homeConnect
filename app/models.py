@@ -1,11 +1,25 @@
 from app import db
 
 
-class User(db.Model):
+class Device(db.Model):
+    __tablename__ = 'devices'
+    __table_args__ = {'extend_existing': True}
+
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
+    ip_address = db.Column(db.String, unique=True, nullable=False)
+    payload = db.Column(db.String, nullable=False)
+    time_received = db.Column(db.String, nullable=False)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<Device {}>'.format(self.ip_address)
+
+
+class RegisteredDevice(db.Model):
+    __tablename__ = 'registered'
+    __table_args__ = {'extend_existing': True}
+
+    id = db.Column(db.Integer, primary_key=True)
+    ip_address = db.Column(db.String, unique=True, nullable=False)
+    name = db.Column(db.String, unique=True, nullable=False)
+    payload = db.Column(db.String, nullable=False)
+    time_registered = db.Column(db.String, nullable=False)

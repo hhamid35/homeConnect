@@ -1,5 +1,6 @@
 flask
 flask-sqlalchemy
+sqlalchemy
 flask-migrate
 flask-wtf
 wtforms

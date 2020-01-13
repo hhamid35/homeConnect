@@ -1,68 +1,116 @@
-function registerDeviceSuccess(data) {
+function unregisterDeviceSuccess(data){
+    if ("success".localeCompare(data.status) == 0) {
+        getDeviceInfo($("#deviceIP").html());
+    }
+    else {
+        alert("Error Registering Device.");
+        getDeviceInfo($("#deviceIP").html());
+    }
+}
 
+function unregisterDevice(){
+    var payload = {
+        ip_address: $("#deviceIP").html()
+    }
+    document.getElementById("selectedDevice").innerHTML = "<br><br><br><br><img src='/static/images/ajax-loader.gif' width='40' height='40'/><br><br>";
+    $.ajax({
+        url: "/unregisterDevice",
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+        success: unregisterDeviceSuccess,
+        error: function(xhr, textStatus, errorThrown) {
+           document.getElementById("selectedDevice").innerHTML = "<br><br><span>Please Try Again In A Few Moments</span><br><br>";
+        }
+    });
+}
+
+function unregisterDeviceButtonClick() {
+    unregisterDevice();
+}
+
+function registerDeviceSuccess(data) {
+    if ("success".localeCompare(data.status) == 0) {
+        getDeviceInfo($("#deviceIP").html());
+    }
+    else {
+        alert("Error Registering Device.");
+        getDeviceInfo($("#deviceIP").html())
+    }
 }
 
 function registerDevice() {
-    var device = {
-        name: $("#deviceName").html(),
+    var payload = {
         ip_address: $("#deviceIP").html(),
-        status: $("#deviceStatus").html(),
-        type: $("#deviceType").html(),
-        topic: $("#topicField").val()
+        name: $("#deviceName").val()
     }
-
+    console.log(payload);
+    document.getElementById("selectedDevice").innerHTML = "<br><br><br><br><img src='/static/images/ajax-loader.gif' width='40' height='40'/><br><br>";
     $.ajax({
         url: "/registerDevice",
         type: "POST",
         dataType: "json",
         contentType: "application/json",
-        data: JSON.stringify(device),
+        data: JSON.stringify(payload),
         success: registerDeviceSuccess,
         error: function(xhr, textStatus, errorThrown) {
-           document.getElementById("devicesDiscovery").innerHTML = "<br><br><span>Please Try Again In A Few Moments</span><br><br>";
+           document.getElementById("selectedDevice").innerHTML = "<br><br><span>Please Try Again In A Few Moments</span><br><br>";
         }
     });
 }
 
+function registerDeviceButtonClick() {
+    registerDevice();
+}
 
 function getDeviceInfoSuccess(data) {
     document.getElementById("selectedDevice").innerHTML = " ";
     document.getElementById("selectedDevice").innerHTML += "<div id='deviceInfo'>";
-    document.getElementById("selectedDevice").innerHTML += "<p><b>Device Name: </b><span id='deviceName'>" + data.name + "</span></p>";
-    document.getElementById("selectedDevice").innerHTML += "<p><b>Device IP Address: </b><span id='deviceIP'>" + data.ip_address + "</span></p>";
+    document.getElementById("selectedDevice").innerHTML += "<p><b>Board Name: </b><span id='boardName'>" + data.payload.board_name + "</span></p>";
+    document.getElementById("selectedDevice").innerHTML += "<p><b>Device IP Address: </b><span id='deviceIP'>" + data.payload.ip_address + "</span></p>";
     document.getElementById("selectedDevice").innerHTML += "<p><b>Device Status: </b><span id='deviceStatus'>" + data.status + "</span></p>";
-    document.getElementById("selectedDevice").innerHTML += "<p><b>Device Type: </b><span id='deviceType'>" + data.device_type + "</span></p></div>";
+    document.getElementById("selectedDevice").innerHTML += "<p><b>Device Type: </b><span id='deviceType'>" + data.payload.device_type + "</span></p></div>";
     if ("unregistered".localeCompare(data.status) == 0) {
-        document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><label>Topic:</label><input type='text' placeholder='Type something...' id='topicField'><br><input type='button' value='Register' onClick='registerDevice()'></div>";
+        document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><label>Topic:</label><input type='text' placeholder='Type something...' id='deviceName'><br><input type='button' value='Register' onClick=registerDeviceButtonClick()></div>";
+    }
+    else if ("registered".localeCompare(data.status) == 0) {
+        document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><input type='button' value='Unregister' onClick='unregisterDeviceButtonClick()'></div>";
     }
     else {
-        document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><input type='button' value='Unregister' onClick='unregisterDevice()'></div>";
+        document.getElementById("selectedDevice").innerHTML = "<p><b>Error Getting Device Information.</b></p> ";
+        document.getElementById("selectedDevice").innerHTML += "<p><b>Check If Device Is Still On the Network.</b></p> ";
     }
 }
 
 
-function getDeviceInfo() {
+function getDeviceInfo(device_ip) {
+    var payload = {
+        ip_address: device_ip
+    }
     $.ajax({
         url: "/getDeviceInfo",
-        method: "GET",
+        type: "POST",
         dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(payload),
         success: getDeviceInfoSuccess,
         error: function(xhr, textStatus, errorThrown) {
-           document.getElementById("devicesDiscovery").innerHTML = "<br><br><span>Please Try Again In A Few Moments</span><br><br>";
+           document.getElementById("selectedDevice").innerHTML = "<br><br><span>Please Try Again In A Few Moments</span><br><br>";
         }
      });
 }
 
 
-function deviceButtonClick() {
+function deviceButtonClick(device_ip) {
     document.getElementById("selectedDevice").innerHTML = "<br><br><br><br><img src='/static/images/ajax-loader.gif' width='40' height='40'/><br><br>";
-    getDeviceInfo();
+    getDeviceInfo(device_ip);
 }
 
 function getDevicesSuccess(data) {
     document.getElementById("devicesDiscovery").innerHTML = " ";
-    for(var i=0;i<data.length;i++) {
-        document.getElementById("devicesDiscovery").innerHTML += "<br><br><input type='button' value='" + data[i].name + " - " + data[i].ip_address + "' onclick='deviceButtonClick()'><br><br>";
+    for ( var i=0; i<data.length; i++ ) {
+        document.getElementById("devicesDiscovery").innerHTML += "<br><br><input type='button' value='" + data[i].board_name + " - " + data[i].ip_address + "' name='" + data[i].ip_address + "' onclick='deviceButtonClick(this.name)'><br><br>";
         if( i == data.length - 1 ) {
             document.getElementById("devicesDiscovery").innerHTML += "<br>";
         }

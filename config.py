@@ -1,9 +1,8 @@
 import os
-basedir = os.path.abspath(os.path.dirname(__file__))
+project_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 class Config(object):
     DEBUG = True
     # SERVER_NAME = '0.0.0.0:80'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////' + os.path.join(basedir, 'app.sqlite')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(project_dir, 'homeConnect.db'))
