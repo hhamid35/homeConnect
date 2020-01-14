@@ -1,1 +1,35 @@
-this is the dashboard page
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>homeConnect</title>
+        <link rel="icon" href="{{url_for('static', filename='images/favicon.jpg')}}" type="image/x-icon" />
+        <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}" />
+        <script src="{{url_for('static', filename='js/jquery-3.4.1.min.js')}}"></script>
+        <script src="{{url_for('static', filename='js/scripts.js')}}"></script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="index.html">
+                <img src="{{url_for('static', filename='images/favicon.jpg')}}" href="index.html" style="width: 80px;height: 80px;" alt="homeConnect"/>
+                <span style="float: right; padding-top: 30px; padding-left: 5px; font-family: Impact, Charcoal, sans-serif;font-size: 60px;">homeConnect</span>
+            </a>
+            <div class="header-right">
+              <a class="active" href="index.html">Home</a>
+              <a href="dashboard.html">Dashboard</a>
+              <a href="admin_info.html">Admin Info.</a>
+            </div>
+        </div>
+        <div class="body">
+            <div class = "availDevices">
+                <span style="margin: 20px;">Available Devices</span>
+                <div id="devicesDiscovery" class="devicesEnumerate">
+
+                </div>
+                <input type="button" value="Refresh" onclick="refresh()"/>
+            </div>
+            <div id="selectedDevice" class="device">
+            </div>
+        </div>
+    </body>
+</html>

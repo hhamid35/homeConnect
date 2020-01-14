@@ -1,6 +1,7 @@
 flask
 flask-sqlalchemy
 sqlalchemy
+flask-mqtt
 flask-migrate
 flask-wtf
 wtforms

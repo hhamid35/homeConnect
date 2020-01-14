@@ -1,15 +1,12 @@
-import paho.mqtt.client as mqtt
 from config import Config
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_mqtt import Mqtt
 
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
-# mqttc = mqtt.Client()
-# mqttc.connect('localhost', 1883, 60)
-# mqttc.loop_start()
+mqtt = Mqtt()
 
 from app import views
 

@@ -75,6 +75,7 @@ function getDeviceInfoSuccess(data) {
         document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><label>Topic:</label><input type='text' placeholder='Type something...' id='deviceName'><br><input type='button' value='Register' onClick=registerDeviceButtonClick()></div>";
     }
     else if ("registered".localeCompare(data.status) == 0) {
+        document.getElementById("selectedDevice").innerHTML += "<p><b>Device Registered As: </b><span id='deviceType'>" + data.name + "</span></p></div>";
         document.getElementById("selectedDevice").innerHTML += "<div id='deviceAction'><input type='button' value='Unregister' onClick='unregisterDeviceButtonClick()'></div>";
     }
     else {
@@ -110,7 +111,7 @@ function deviceButtonClick(device_ip) {
 function getDevicesSuccess(data) {
     document.getElementById("devicesDiscovery").innerHTML = " ";
     for ( var i=0; i<data.length; i++ ) {
-        document.getElementById("devicesDiscovery").innerHTML += "<br><br><input type='button' value='" + data[i].board_name + " - " + data[i].ip_address + "' name='" + data[i].ip_address + "' onclick='deviceButtonClick(this.name)'><br><br>";
+        document.getElementById("devicesDiscovery").innerHTML += "<br><br><input type='button' value='" + data[i].payload.board_name + " - " + data[i].ip_address + "' name='" + data[i].ip_address + "' onclick='deviceButtonClick(this.name)'><br><br>";
         if( i == data.length - 1 ) {
             document.getElementById("devicesDiscovery").innerHTML += "<br>";
         }
