@@ -1,5 +1,5 @@
 from flask import render_template, request, url_for, jsonify
-from app import app, db, mqtt
+from app import app, db, mqtt, socketio
 from .models import Device, RegisteredDevice
 import json
 import time
@@ -234,7 +234,18 @@ def dashboard():
     return render_template('dashboard.html', devices=devices)
 
 
-@app.route('/switchAction', method=['POST'])
+@socketio.on('device_event')
+def device_event(message):
+    return ''
+
+
+@socketio.on('eventServer')
+def broadcast_event(message):
+    print(message)
+    socketio.emit('eventClient', {'data': 'server is here'})
+
+
+@app.route('/switchAction', methods=['POST'])
 def switch_action():
     return ''
 

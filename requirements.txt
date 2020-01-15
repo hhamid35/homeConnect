@@ -2,6 +2,7 @@ flask
 flask-sqlalchemy
 sqlalchemy
 flask-mqtt
+flask-socketio
 flask-migrate
 flask-wtf
 wtforms
