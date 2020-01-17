@@ -33,8 +33,15 @@
             </div>
         </div>
         <div class="body">
-            <div class = "availDevices">
-                <span id="myText"></span>
+            <div class = "devices">
+                {% for device in devices %}
+                    {% if device.payload.device_type == "switch" %}
+                        <lable class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </lable>
+                    {% endif %}
+                {% endfor %}
             </div>
             <div id="selectedDevice" class="device">
             </div>

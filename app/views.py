@@ -230,7 +230,15 @@ def unregister_device():
 @app.route('/dashboard')
 @app.route('/dashboard.html')
 def dashboard():
+    device_query = RegisteredDevice.query.all()
     devices = []
+    for device in device_query:
+        devices.append({
+            'ip_address': device.ip_address,
+            'name': device.name,
+            'payload': json.loads(device.payload),
+            'time_registered': device.time_registered
+        })
     return render_template('dashboard.html', devices=devices)
 
 
