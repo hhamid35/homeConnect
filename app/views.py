@@ -1,5 +1,5 @@
 from flask import render_template, request, url_for, jsonify
-from app import app, db, mqtt, socketio
+from app import app, db, socketio, mqtt
 from .models import Device, RegisteredDevice
 import json
 import time
