@@ -1,4 +1,4 @@
-from app import app, mqtt, socketio
+from app import app, socketio, mqtt
 
 
 if __name__ == '__main__':
