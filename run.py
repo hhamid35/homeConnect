@@ -1,6 +1,4 @@
-from app import app, socketio, mqtt
-
+from app import app, socketio
 
 if __name__ == '__main__':
     socketio.run(app)
-    mqtt.run(app)
