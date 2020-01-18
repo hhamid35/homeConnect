@@ -36,10 +36,10 @@
             <div class = "devices">
                 {% for device in devices %}
                     {% if device.payload.device_type == "switch" %}
-                        <lable class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </lable>
+                        <div class="item">
+                            <input type="checkbox"/>
+                        </div>
+                    {% elif device.payload.device_type == "dim switch" %}
                     {% endif %}
                 {% endfor %}
             </div>
