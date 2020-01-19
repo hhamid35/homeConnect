@@ -3,7 +3,6 @@ function deviceActionSuccess(data) {
 }
 
 function deviceAction(device, action_type, pin_num, change_to) {
-    device.payload = JSON.parse(device.payload);
     var payload = {
         ip_address: device.name,
         action: action_type,
