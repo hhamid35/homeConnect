@@ -9,7 +9,7 @@ function deviceAction(device, action_type, pin_num, change_to) {
         pin: pin_num,
     }
 
-    if ( "switch".localCompare(device.payload.device_type) == 0 ) {
+    if ( "switch".localeCompare(device.payload.device_type) == 0 ) {
         payload.add(state, change_to);
     }
     else {
