@@ -1,3 +1,35 @@
+function deviceActionSuccess(data) {
+    console.log(data);
+}
+
+function deviceAction(device, action_type, pin_num, change_to) {
+    device.payload = JSON.parse(device.payload);
+    var payload = {
+        ip_address: device.name,
+        action: action_type,
+        pin: pin_num,
+    }
+
+    if ( "switch".localCompare(device.payload.device_type) == 0 ) {
+        payload.set(state, change_to);
+    }
+    else {
+        payload.set(value, change_to);
+    }
+
+    $.ajax({
+        url: "/deviceAction",
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+        success: deviceActionSuccess,
+        error: function(xhr, textStatus, errorThrown) {
+           document.getElementById("selectedDevice").innerHTML = "<br><br><span>Please Try Again In A Few Moments</span><br><br>";
+        }
+    });
+}
+
 function unregisterDeviceSuccess(data){
     if ("success".localeCompare(data.status) == 0) {
         getDeviceInfo($("#deviceIP").html());
