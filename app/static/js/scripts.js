@@ -4,7 +4,7 @@ function deviceActionSuccess(data) {
 
 function deviceAction(device, action_type, pin_num, state) {
     var payload = {
-        ip_address: device.name,
+        name: device.name,
         action: action_type,
         pin: pin_num,
         change_to: state

@@ -283,7 +283,7 @@ def device_action():
     }
     if request.method == 'POST':
         payload = request.get_json()
-        device = RegisteredDevice.query.filter_by(ip_address=payload['name']).first()
+        device = RegisteredDevice.query.filter_by(name=payload['name']).first()
         if device:
             device_payload = json.loads(device.payload)
             if payload['action'] == 'dev_event':
@@ -292,7 +292,7 @@ def device_action():
                 }
                 if device_payload['device_type'] == 'switch':
                     message['pin'] = payload['pin']
-                    message['state'] = payload['state']
+                    message['change_to'] = payload['change_to']
                     mqtt.publish(os.path.join('homeConnect/device/', device_payload['topic']), json.dumps(message))
                     response = {
                         'status': 'success'
