@@ -2,18 +2,12 @@ function deviceActionSuccess(data) {
     console.log(data);
 }
 
-function deviceAction(device, action_type, pin_num, change_to) {
+function deviceAction(device, action_type, pin_num, state) {
     var payload = {
         ip_address: device.name,
         action: action_type,
         pin: pin_num,
-    }
-
-    if ( "switch".localeCompare(device.payload.device_type) == 0 ) {
-        payload.add(state, change_to);
-    }
-    else {
-        payload.add(value, change_to);
+        change_to: state
     }
 
     $.ajax({
