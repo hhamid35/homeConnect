@@ -37,7 +37,7 @@
                 {% for device in devices %}
                     {% if device.payload.device_type == "switch" %}
                         <br><b><span>{{ device.name }}</span></b>
-                        <input type="button" id="{{ device.name }}" value="Action" onclick="deviceAction({{ device }}, 1, false)"/><br>
+                        <input type="button" id="{{ device.name }}" value="Action" onclick="deviceAction({{ device }}, 'dev_event', 1, false)"/><br>
                     {% endif %}
                 {% endfor %}
             </div>
