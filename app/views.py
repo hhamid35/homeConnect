@@ -216,7 +216,7 @@ def register_device():
             response = {
                 'status': 'success'
             }
-    return response
+    return json.dumps(response)
 
 
 """
@@ -245,7 +245,7 @@ def unregister_device():
             response = {
                 'status': 'success'
             }
-    return response
+    return json.dumps(response)
 
 
 @app.route('/dashboard')
@@ -297,7 +297,7 @@ def device_action():
                     response = {
                         'status': 'success'
                     }
-    return response
+    return json.dumps(response)
 
 
 @socketio.on('device_event')
