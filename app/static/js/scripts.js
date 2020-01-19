@@ -10,10 +10,10 @@ function deviceAction(device, action_type, pin_num, change_to) {
     }
 
     if ( "switch".localCompare(device.payload.device_type) == 0 ) {
-        payload.set(state, change_to);
+        payload.add(state, change_to);
     }
     else {
-        payload.set(value, change_to);
+        payload.add(value, change_to);
     }
 
     $.ajax({
