@@ -11,10 +11,7 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 var socket = io();
-                socket.on('connect', function() {
-                    socket.emit('eventServer', {data: 'I\'m connected!'});
-                });
-      	        socket.on('eventClient', function(msg) {
+      	        socket.on('deviceReply', function(msg) {
                     document.getElementById('myText').innerHTML = msg.data;
       	        });
             });
@@ -37,7 +34,9 @@
                 {% for device in devices %}
                     {% if device.payload.device_type == "switch" %}
                         <br><b><span>{{ device.name }}</span></b>
-                        <input type="button" id="{{ device.name }}" value="Action" onclick="deviceAction({{ device }}, 'dev_event', 1, false)"/><br>
+                        <input type="button" id="{{ device.name }} On" value="Action" onclick="deviceAction({{ device.name }}, 'dev_event', 1, True)"/>
+                        <input type="button" id="{{ device.name }} Off" value="Action" onclick="deviceAction({{ device.name }}, 'dev_event', 1, false)"/>
+                        <br>
                     {% endif %}
                 {% endfor %}
             </div>

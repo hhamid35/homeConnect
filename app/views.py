@@ -12,11 +12,10 @@ def handle_connect(client, userdata, flags, rc):
 
 
 @mqtt.on_message()
-def handle_mqtt_message(client, userdata, message):
-    print(message)
-    # payload = json.loads(message.decode('utf-8'))
-    # if payload['status'] == 'success':
-    #     print(payload)
+def on_message(client, userdata, message):
+    payload = json.loads(message.payload.decode('utf-8'))
+    if payload['status'] == 'success':
+        socketio.emit('deviceReply', json.dumps(payload))
 
 
 def check_devices():
