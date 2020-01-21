@@ -12,7 +12,7 @@
             $(document).ready(function() {
                 var socket = io();
       	        socket.on('deviceReply', function(msg) {
-                    document.getElementById('myText').innerHTML = msg.data;
+      	            console.log(msg.data);
       	        });
             });
         </script>
@@ -34,8 +34,8 @@
                 {% for device in devices %}
                     {% if device.payload.device_type == "switch" %}
                         <br><b><span>{{ device.name }}</span></b>
-                        <input type="button" id="{{ device.name }} On" value="Action" onclick="deviceAction({{ device.name }}, 'dev_event', 1, True)"/>
-                        <input type="button" id="{{ device.name }} Off" value="Action" onclick="deviceAction({{ device.name }}, 'dev_event', 1, false)"/>
+                        <input type="button" id="{{ device.name }} On" value="On" onclick="deviceAction('{{ device.name }}', 'dev_event', 1, true)"/>
+                        <input type="button" id="{{ device.name }} Off" value="Off" onclick="deviceAction('{{ device.name }}', 'dev_event', 1, false)"/>
                         <br>
                     {% endif %}
                 {% endfor %}

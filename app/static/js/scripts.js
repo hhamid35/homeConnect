@@ -2,14 +2,13 @@ function deviceActionSuccess(data) {
     console.log(data);
 }
 
-function deviceAction(device, action_type, pin_num, state) {
+function deviceAction(device_name, action_type, pin_num, state) {
     var payload = {
-        name: device.name,
+        name: device_name,
         action: action_type,
         pin: pin_num,
         change_to: state
     }
-
     $.ajax({
         url: "/deviceAction",
         type: "POST",

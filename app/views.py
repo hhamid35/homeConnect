@@ -293,6 +293,7 @@ def device_action():
                 if device_payload['device_type'] == 'switch':
                     message['pin'] = payload['pin']
                     message['change_to'] = payload['change_to']
+                    print(device_payload['topic'], message)
                     mqtt.publish(os.path.join('homeConnect/device/', device_payload['topic']), json.dumps(message))
                     response = {
                         'status': 'success'
