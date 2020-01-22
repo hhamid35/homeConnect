@@ -14,8 +14,22 @@ def handle_connect(client, userdata, flags, rc):
 @mqtt.on_message()
 def on_message(client, userdata, message):
     payload = json.loads(message.payload.decode('utf-8'))
-    if payload['status'] == 'success':
-        socketio.emit('deviceReply', json.dumps(payload))
+    if message.topic == 'homeConnect/rpi/discovery':
+        discovery_action(payload)
+    elif message.topic == 'homeConnect/rpi/deviceReply':
+        print(payload)
+
+
+def discovery_action(payload):
+    device = Device.query.filter_by(ip_address=payload['ip_address']).first()
+    if device:
+        device.time_received = int(time.time())
+    else:
+        new_device = Device(ip_address=payload['ip_address'],
+                            payload=json.dumps(payload),
+                            time_received=int(time.time()))
+        db.session.add(new_device)
+        db.session.commit()
 
 
 def check_devices():
