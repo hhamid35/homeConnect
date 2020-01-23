@@ -11,7 +11,7 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 var socket = io();
-      	        socket.on('deviceReply', function(msg) {
+      	        socket.on('homeConnect/browser/dashboard/rpiUpdate', function(msg) {
                     document.getElementById('myText').innerHTML = msg.data;
       	        });
             });
