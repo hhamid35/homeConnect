@@ -8,14 +8,50 @@ import os
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    mqtt.subscribe('homeConnect/dev/rpi/response')
+    mqtt.subscribe('homeConnect/rpi/discovery')
+    mqtt.subscribe('homeConnect/rpi/deviceReply')
 
 
 @mqtt.on_message()
 def on_message(client, userdata, message):
     payload = json.loads(message.payload.decode('utf-8'))
-    if payload['status'] == 'success':
-        socketio.emit('deviceReply', json.dumps(payload))
+    if message.topic == 'homeConnect/rpi/discovery':
+        device_discovery(payload)
+    elif message.topic == 'homeConnect/rpi/deviceReply':
+        browser_update(payload)
+
+
+"""
+    payload = {
+        'ip_address': '192.168.0.103'
+        'board_name': 'esp8266',
+        'mac_address': 'AC:12:F5:D2:A3',
+        'topic': 'esp8266_A3',
+        'device_type': 'switch'
+    }
+"""
+def device_discovery(payload):
+    device = Device.query.filter_by(ip_address=payload['ip_address']).first()
+    if device:
+        device.time_received = int(time.time())
+    else:
+        new_device = Device(ip_address=payload['ip_address'],
+                            payload=json.dumps(payload),
+                            time_received=int(time.time()))
+        db.session.add(new_device)
+        db.session.commit()
+
+"""
+    payload = {
+        'status': 'success',
+        'information': {
+            'ip_address': '192.168.0.103',
+            'current_state': true
+        } 
+    }
+"""
+def browser_update(payload):
+    socketio.emit('homeConnect/browser/dashboard/rpiUpdate', json.dumps(payload))
 
 
 def check_devices():
@@ -40,8 +76,8 @@ def index():
 
 """
     request = {
-        'ip_address': '192.168.0.103'
         'payload' : {
+            'ip_address': '192.168.0.103',
             'board_name': 'esp8266',
             'mac_address': 'AC:12:F5:D2:A3',
             'topic': 'esp8266_A3',
