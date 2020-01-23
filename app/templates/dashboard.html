@@ -10,8 +10,9 @@
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                var socket = io();
-      	        socket.on('homeConnect/browser/dashboard/rpiUpdate', function(msg) {
+                var socketio = io();
+
+      	        socketio.on('homeConnect/browser/dashboard/rpiUpdate', function(msg) {
                     document.getElementById('myText').innerHTML = msg.data;
       	        });
             });
@@ -34,8 +35,8 @@
                 {% for device in devices %}
                     {% if device.payload.device_type == "switch" %}
                         <br><b><span>{{ device.name }}</span></b>
-                        <input type="button" id="{{ device.name }} On" value="On" onclick="deviceAction({{ device.name }}, 'dev_event', 1, True)"/>
-                        <input type="button" id="{{ device.name }} Off" value="Off" onclick="deviceAction({{ device.name }}, 'dev_event', 1, false)"/>
+                        <input type="button" id="{{ device.name }} On" value="On" onclick="deviceChangeState('{{ device.name }}', true)"/>
+                        <input type="button" id="{{ device.name }} Off" value="Off" onclick="deviceChangeState('{{ device.name }}', false)"/>
                         <br>
                     {% endif %}
                 {% endfor %}

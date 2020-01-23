@@ -31,6 +31,7 @@ def on_message(client, userdata, message):
     }
 """
 def device_discovery(payload):
+    print('discovered', payload)
     device = Device.query.filter_by(ip_address=payload['ip_address']).first()
     if device:
         device.time_received = int(time.time())
@@ -74,50 +75,47 @@ def index():
     return render_template('index.html')
 
 
-"""
-    request = {
-        'payload' : {
-            'ip_address': '192.168.0.103',
-            'board_name': 'esp8266',
-            'mac_address': 'AC:12:F5:D2:A3',
-            'topic': 'esp8266_A3',
-            'device_type': 'switch'
-        }
-    }
-    
-    response = {
-        'status': 'success'/ 'error',
-    }
-"""
-@app.route('/newDevice')
-def new_device():
-    check_devices()
-    payload = {
-        'board_name': 'esp8266',
-        'mac_address': 'AC:12:F5:D2:A3',
-        'topic': 'esp8266_A3',
-        'device_type': 'switch'
-    }
-    device = Device(ip_address=payload['ip_address'],
-                    payload=json.dumps(payload),
-                    time_received=int(time.time()))
-    db.session.merge(device)
-    connection = db.session.connection()
-    connection.execute('')
-    return [(device.ip_address, device.time_received) for device in Device.query.all()]
+# """
+#     request = {
+#         'payload' : {
+#             'ip_address': '192.168.0.103',
+#             'board_name': 'esp8266',
+#             'mac_address': 'AC:12:F5:D2:A3',
+#             'topic': 'esp8266_A3',
+#             'device_type': 'switch'
+#         }
+#     }
+#
+#     response = {
+#         'status': 'success'/ 'error',
+#     }
+# """
+# @app.route('/newDevice')
+# def new_device():
+#     check_devices()
+#     payload = {
+#         'board_name': 'esp8266',
+#         'mac_address': 'AC:12:F5:D2:A3',
+#         'topic': 'esp8266_A3',
+#         'device_type': 'switch'
+#     }
+#     device = Device(ip_address=payload['ip_address'],
+#                     payload=json.dumps(payload),
+#                     time_received=int(time.time()))
+#     db.session.merge(device)
+#     connection = db.session.connection()
+#     connection.execute('')
+#     return [(device.ip_address, device.time_received) for device in Device.query.all()]
 
 
 """
     request = {}
     
     response = [
-        {
-            'board_name': 'esp8266',
+        {   
             'ip_address': '192.168.0.103',
-        },
-        {
-            'ip_address': '192.168.0.103'
             'payload' : {
+                'ip_address': '192.168.0.103'
                 'board_name': 'esp8266',
                 'mac_address': 'AC:12:F5:D2:A3',
                 'topic': 'esp8266_A3',
@@ -132,13 +130,6 @@ def get_devices():
     check_devices()
     devices = []
     for device in Device.query.all():
-        # if (time.time() - device.time_received) < 100000:
-        #     payload = json.loads(device.payload)
-        #     devices.append({
-        #         'board_name': payload['board_name'],
-        #         'ip_address': device.ip_address
-        #     })
-        payload = json.loads(device.payload)
         devices.append({
             'ip_address': device.ip_address,
             'payload': json.loads(device.payload),
@@ -148,48 +139,14 @@ def get_devices():
 
 
 """
-    request = {}
-
-    response = [
-        {
-            'board_name': 'esp8266',
-            'ip_address': '192.168.0.103',
-        },
-        {
-            'board_name': 'esp8266',
-            'ip_address': '192.168.0.104',
-        },
-    ]
-"""
-@app.route('/getRegisteredDevices', methods=['GET'])
-def get_registered_devices():
-    check_devices()
-    devices = []
-    for device in RegisteredDevice.query.all():
-        # if (time.time() - device.time_received) < 100000:
-        #     payload = json.loads(device.payload)
-        #     devices.append({
-        #         'board_name': payload['board_name'],
-        #         'ip_address': device.ip_address
-        #     })
-        payload = json.loads(device.payload)
-        devices.append({
-            'ip_address': device.ip_address,
-            'name': device.name,
-            'payload': payload,
-            'time_registered': device.time_registered
-        })
-    return json.dumps(devices)
-
-
-"""
     request = {
         'ip_address': '192.168.0.103'
     }
-    
+
     response = {
         'status': 'registered'/'unregistered'/'error',
         'payload': {
+            'ip_address': '192.168.0.103'
             'board_name': 'esp8266',
             'mac_address': 'AC:12:F5:D2:A3',
             'topic': 'esp8266_A3',
@@ -284,9 +241,26 @@ def unregister_device():
     return json.dumps(response)
 
 
-@app.route('/dashboard')
-@app.route('/dashboard.html')
-def dashboard():
+"""
+    request = {}
+
+    response = [
+        {   
+            'ip_address': '192.168.0.103',
+            'name': 'Lamp One'
+            'payload' : {
+                'ip_address': '192.168.0.103'
+                'board_name': 'esp8266',
+                'mac_address': 'AC:12:F5:D2:A3',
+                'topic': 'esp8266_A3',
+                'device_type': 'switch'
+            },
+            'time_registered': 155555.445
+        },
+    ]
+"""
+@app.route('/getRegisteredDevices', methods=['GET'])
+def get_registered_devices():
     check_devices()
     devices = []
     for device in RegisteredDevice.query.all():
@@ -296,14 +270,29 @@ def dashboard():
             'payload': json.loads(device.payload),
             'time_registered': device.time_registered
         })
+    return json.dumps(devices)
+
+
+@app.route('/dashboard')
+@app.route('/dashboard.html')
+def dashboard():
+    check_devices()
+    devices = []
+    for device in RegisteredDevice.query.all():
+        device_payload = json.loads(device.payload)
+        devices.append({
+            'ip_address': device.ip_address,
+            'name': device.name,
+            'payload': device_payload,
+            'time_registered': device.time_registered
+        })
+        mqtt.publish(os.path.join('homeConnect/device/', device_payload['topic']), json.dumps({'action': 'get_current_state'}))
     return render_template('dashboard.html', devices=devices)
 
 
 """
     request = {
         'name': 'Lamp One',
-        'action': 'dev_event',
-        'pin': 1,
         'state'/'value': True/100%,
     }
     
@@ -311,8 +300,8 @@ def dashboard():
         'status': 'success'
     }
 """
-@app.route('/deviceAction', methods=['POST'])
-def device_action():
+@app.route('/deviceChangeState', methods=['POST'])
+def device_change_state():
     check_devices()
     response = {
         'status': 'error'
@@ -322,35 +311,15 @@ def device_action():
         device = RegisteredDevice.query.filter_by(name=payload['name']).first()
         if device:
             device_payload = json.loads(device.payload)
-            if payload['action'] == 'dev_event':
-                message = {
-                    'action': payload['action'],
-                }
-                if device_payload['device_type'] == 'switch':
-                    message['pin'] = payload['pin']
-                    message['change_to'] = payload['change_to']
-                    print(device_payload['topic'], message)
-                    mqtt.publish(os.path.join('homeConnect/device/', device_payload['topic']), json.dumps(message))
-                    response = {
-                        'status': 'success'
-                    }
+            message = {
+                'action': 'change_state',
+                'change_to': payload['change_to']
+            }
+            mqtt.publish(os.path.join('homeConnect/device/', device_payload['topic']), json.dumps(message))
+            response = {
+                'status': 'success'
+            }
     return json.dumps(response)
-
-
-@socketio.on('device_event')
-def no(message):
-    return ''
-
-
-@socketio.on('eventServer')
-def broadcast_event(message):
-    print(message)
-    socketio.emit('eventClient', {'data': 'server is here'})
-
-
-@app.route('/switchAction', methods=['POST'])
-def switch_action():
-    return ''
 
 
 @app.route('/about')

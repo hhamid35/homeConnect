@@ -1,21 +1,19 @@
-function deviceActionSuccess(data) {
+function deviceChangeStateSuccess(data) {
     console.log(data);
 }
 
-function deviceAction(device_name, action_type, pin_num, state) {
+function deviceChangeState(device_name, state) {
     var payload = {
         name: device_name,
-        action: action_type,
-        pin: pin_num,
         change_to: state
     }
     $.ajax({
-        url: "/deviceAction",
+        url: "/deviceChangeState",
         type: "POST",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(payload),
-        success: deviceActionSuccess,
+        success: deviceChangeStateSuccess,
         error: function(xhr, textStatus, errorThrown) {
            document.getElementById("selectedDevice").innerHTML = "<br><br><span>Please Try Again In A Few Moments</span><br><br>";
         }
