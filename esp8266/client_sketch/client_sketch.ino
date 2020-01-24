@@ -7,8 +7,8 @@
 #define MAX_MSG_LEN (128)
 
 // Wifi configuration
-const char* ssid = "Haris_5Ghz";
-const char* password = "156haris";
+const char* ssid = "your ssid";
+const char* password = "your password";
 
 // MQTT Configuration
 // if you have a hostname set for the MQTT server, you can use it here
