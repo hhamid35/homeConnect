@@ -61,6 +61,7 @@ def browser_update(payload):
             'device_name': device.name,
             'current_state': payload['current_state']
         }
+        print('reached to 3', message)
         socketio.emit('homeConnect/browser/dashboard/rpiUpdate', json.dumps(message))
 
 
