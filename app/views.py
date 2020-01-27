@@ -18,6 +18,7 @@ def on_message(client, userdata, message):
     if message.topic == 'homeConnect/rpi/discovery':
         device_discovery(payload)
     elif message.topic == 'homeConnect/rpi/deviceReply':
+        print('reached to 1')
         browser_update(payload)
 
 
@@ -42,6 +43,7 @@ def device_discovery(payload):
         db.session.add(new_device)
         db.session.commit()
 
+
 """
     payload = {
         'status': 'success',
@@ -52,6 +54,7 @@ def device_discovery(payload):
     }
 """
 def browser_update(payload):
+    print('reached to 2', payload)
     device = RegisteredDevice.query.filter_by(ip_address=payload['ip_address'])
     if device:
         message = {

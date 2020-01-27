@@ -13,7 +13,8 @@
                 var socketio = io();
 
       	        socketio.on('homeConnect/browser/dashboard/rpiUpdate', function(msg) {
-      	            console.log(msg);
+      	            console.log(msg.current_state);
+      	            console.log(msg.device_name);
       	            if (msg.current_state == 1) {
                         $(msg.device_name).attr("value", "Off");
                         $(msg.device_name).attr("onclick", "deviceChangeState('" + msg.device_name + "', 0)");
