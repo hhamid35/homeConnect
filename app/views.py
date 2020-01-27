@@ -55,7 +55,7 @@ def device_discovery(payload):
 """
 def browser_update(payload):
     print('reached to 2', payload)
-    device = RegisteredDevice.query.filter_by(ip_address=payload['ip_address'])
+    device = RegisteredDevice.query.filter_by(ip_address=payload['ip_address']).first()
     if device:
         message = {
             'device_name': device.name,
