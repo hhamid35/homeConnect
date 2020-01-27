@@ -73,14 +73,11 @@ void reconnect() {
   }
 }
 
-void change_state(bool state) {
-  Serial.println("change_state");
+void change_state(int state) {
   if (state) {
-    Serial.print("true");
     digitalWrite(pin, HIGH);
   }
   else {
-    Serial.print("false");
     digitalWrite(pin, LOW);
   }
 }
@@ -125,7 +122,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     return;
   }
   if ((strcmp(doc["action"].as<char*>(), "change_state")) == 0) {
-      change_state(doc["change_to"].as<bool>());
+      change_state(doc["change_to"].as<int>());
       publish_current_state();
   }
   else if ((strcmp(doc["action"].as<char*>(), "get_current_state")) == 0) {
