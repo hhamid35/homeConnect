@@ -52,6 +52,7 @@ def device_discovery(payload):
     }
 """
 def browser_update(payload):
+    print('got reply')
     socketio.emit('homeConnect/browser/dashboard/rpiUpdate', json.dumps(payload))
 
 

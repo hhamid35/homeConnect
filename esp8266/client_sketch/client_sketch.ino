@@ -1,107 +1,146 @@
-#include <ESP8266WiFi.h> 
+#include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <ArduinoJson.h>
 
-// use onboard LED for convenience 
-#define LED (2)
-// maximum received message length 
-#define MAX_MSG_LEN (128)
+#define wifi_ssid "Haris_2.4GHz"
+#define wifi_password "2803haris"
 
-// Wifi configuration
-const char* ssid = "your ssid";
-const char* password = "your password";
+#define mqtt_server "address"
+#define mqtt_port 1883
+#define mqtt_user "light"
+#define mqtt_password "12345"
 
-// MQTT Configuration
-// if you have a hostname set for the MQTT server, you can use it here
-//const char *serverHostname = "your MQTT server hostname";
-// otherwise you can use an IP address like this
+#define discovery_topic "homeConnect/rpi/discovery"
+#define listen_topic "homeConnect/device/esp8266_CA"
+#define reply_topic "homeConnect/rpi/deviceReply"
+#define device_type "switch"
+#define pin 16
+const int BUFFER_SIZE = JSON_OBJECT_SIZE(10);
+
 const IPAddress serverIPAddress(192, 168, 0, 103);
-// the topic we want to use
-const char *topic = "test/message";
-
 WiFiClient espClient;
-PubSubClient client(espClient);
+PubSubClient client;
 
 void setup() {
-  // LED pin as output
-  pinMode(LED, OUTPUT);      
-  digitalWrite(LED, HIGH);
-  // Configure serial port for debugging
-  Serial.begin(115200);
-  // Initialise wifi connection - this will wait until connected
-  connectWifi();
-  // connect to MQTT server  
-  client.setServer(serverIPAddress, 1883);
+  Serial.println(MQTT_MAX_PACKET_SIZE);
+  Serial.begin(9600);
+  setup_wifi();
+  client.setClient(espClient);
+  client.setServer(serverIPAddress, mqtt_port);
   client.setCallback(callback);
+  
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(pin, OUTPUT);
 }
 
-void loop() {
-    if (!client.connected()) {
-      connectMQTT();
-    }
-    // this is ESSENTIAL!
-    client.loop();
-    // idle
-    delay(500);
-}
-
-// connect to wifi
-void connectWifi() {
+void setup_wifi() {
   delay(10);
-  // Connecting to a WiFi network
-  Serial.printf("\nConnecting to %s\n", ssid);
-  WiFi.begin(ssid, password);
+  // We start by connecting to a WiFi network
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(wifi_ssid);
+
+  WiFi.begin(wifi_ssid, wifi_password);
+
   while (WiFi.status() != WL_CONNECTED) {
-    delay(250);
+    delay(500);
     Serial.print(".");
   }
+
   Serial.println("");
-  Serial.print("WiFi connected on IP address ");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 }
 
-// connect to MQTT server
-void connectMQTT() {
-  // Wait until we're connected
+void reconnect() {
+  // Loop until we're reconnected
   while (!client.connected()) {
-    // Create a random client ID
-    String clientId = "ESP8266-";
-    clientId += String(random(0xffff), HEX);
-    Serial.printf("MQTT connecting as client %s...\n", clientId.c_str());
+    Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect(clientId.c_str())) {
-      Serial.println("MQTT connected");
-      // Once connected, publish an announcement...
-      client.publish(topic, "hello from ESP8266");
-      // ... and resubscribe
-      client.subscribe(topic);
-    } else {
-      Serial.printf("MQTT failed, state %s, retrying...\n", client.state());
-      // Wait before retrying
-      delay(2500);
+    // If you do not want to use a username and password, change next line to
+    //if (client.connect("ESP8266Client", mqtt_user, mqtt_password)) {
+    if (client.connect("ESP8266Client")) {
+      Serial.println("connected");
+    } 
+    else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
     }
   }
 }
 
-void callback(char *msgTopic, byte *msgPayload, unsigned int msgLength) {
-  // copy payload to a static string
-  static char message[MAX_MSG_LEN+1];
-  if (length > MAX_MSG_LEN) {
-    length = MAX_MSG_LEN;
+void change_state(bool state) {
+  Serial.println("change_state");
+  if (state) {
+    Serial.print("true");
+    digitalWrite(pin, HIGH);
   }
-  strncpy(message, (char *)payload, length);
-  message[length] = '\0';
-  
-  Serial.printf("topic %s, message received: %s\n", topic, message);
-
-  // decode message
-  if (strcmp(message, "off") == 0) {
-    setLedState(false);
-  } else if (strcmp(message, "on") == 0) {
-    setLedState(true);
+  else {
+    Serial.print("false");
+    digitalWrite(pin, LOW);
   }
 }
 
-void setLedState(boolean state) {
-  // LED logic is inverted, low means on
-  digitalWrite(LED, !state);
+void publish_current_state() {
+  DynamicJsonDocument doc(256);
+  doc["ip_address"] = WiFi.localIP().toString();
+  doc["current_state"] = digitalRead(pin);
+  char buffer[512];
+  size_t n = serializeJson(doc, buffer);
+  
+  String json = "{\"ip_address\": \"" + WiFi.localIP().toString() + "\", \"current_state\": " + digitalRead(pin)+ "}";
+    
+  client.publish(reply_topic, buffer, n);
+}
+
+void publish_discovery() {
+  DynamicJsonDocument doc(256);
+  doc["ip_address"] = WiFi.localIP().toString();
+  doc["curren_state"] = digitalRead(pin);
+  doc["mac_address"] = WiFi.macAddress();
+  doc["topic"] = listen_topic;
+  doc["device_type"] = device_type;
+  doc["pin"] = pin;
+  char buffer[512];
+  size_t n = serializeJson(doc, buffer);
+  
+  client.publish(reply_topic, buffer, n);
+  
+  String json = "{\"ip_address\": \"" + WiFi.localIP().toString() + "\", \"current_state\": " + digitalRead(pin)+ ", \"mac_address\": \"" + WiFi.macAddress() + "\", \"topic\": \"" + listen_topic + "\", \"device_type\": \"" + device_type + "\", \"pin\": " + pin + "}";
+}
+
+void callback(char* topic, byte* payload, unsigned int length) {
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  
+  StaticJsonDocument<256> doc;
+  DeserializationError error = deserializeJson(doc, payload, length);
+ 
+  if (error) {
+    return;
+  }
+  if ((strcmp(doc["action"].as<char*>(), "change_state")) == 0) {
+      change_state(doc["change_to"].as<bool>());
+      publish_current_state();
+  }
+  else if ((strcmp(doc["action"].as<char*>(), "get_current_state")) == 0) {
+    publish_current_state();
+  }
+  else {
+    return;
+  }
+}
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+  publish_discovery();
+  client.subscribe(listen_topic);
 }
