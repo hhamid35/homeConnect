@@ -104,7 +104,8 @@ void publish_discovery() {
   doc["pin"] = pin;
   char buffer[512];
   size_t n = serializeJson(doc, buffer);
-  
+
+  Serial.println("get_current_state");
   client.publish(reply_topic, buffer, n);
   
   String json = "{\"ip_address\": \"" + WiFi.localIP().toString() + "\", \"current_state\": " + digitalRead(pin)+ ", \"mac_address\": \"" + WiFi.macAddress() + "\", \"topic\": \"" + listen_topic + "\", \"device_type\": \"" + device_type + "\", \"pin\": " + pin + "}";
