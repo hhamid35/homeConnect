@@ -52,8 +52,13 @@ def device_discovery(payload):
     }
 """
 def browser_update(payload):
-    print('got reply', payload)
-    socketio.emit('homeConnect/browser/dashboard/rpiUpdate', json.dumps(payload))
+    device = RegisteredDevice.query.filter_by(ip_address=payload['ip_address'])
+    if device:
+        message = {
+            'device_name': device.name,
+            'current_state': payload['current_state']
+        }
+        socketio.emit('homeConnect/browser/dashboard/rpiUpdate', json.dumps(message))
 
 
 def check_devices():

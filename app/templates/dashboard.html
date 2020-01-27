@@ -14,8 +14,15 @@
 
       	        socketio.on('homeConnect/browser/dashboard/rpiUpdate', function(msg) {
       	            console.log(msg);
-                    document.getElementById('myText').innerHTML = msg.data;
-      	        });
+      	            if (msg.current_state == 1) {
+                        $(msg.device_name).attr("value", "Off");
+                        $(msg.device_name).attr("onclick", "deviceChangeState('" + msg.device_name + "', 0)");
+                    }
+                    else if (msg.current_state == 0) {
+                        $(msg.device_name).attr("value", "On");
+                        $(msg.device_name).attr("onclick", "deviceChangeState('" + msg.device_name + "', 1)");
+                    }
+                });
             });
         </script>
     </head>
@@ -36,8 +43,7 @@
                 {% for device in devices %}
                     {% if device.payload.device_type == "switch" %}
                         <br><b><span>{{ device.name }}</span></b>
-                        <input type="button" id="{{ device.name }} On" value="On" onclick="deviceChangeState('{{ device.name }}', true)"/>
-                        <input type="button" id="{{ device.name }} Off" value="Off" onclick="deviceChangeState('{{ device.name }}', false)"/>
+                        <input type="button" id="{{ device.name }}" value="Invalid" onclick="deviceChangeState('{{ device.name }}', -1)"/>
                         <br>
                     {% endif %}
                 {% endfor %}
