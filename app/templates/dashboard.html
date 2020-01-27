@@ -13,6 +13,7 @@
                 var socketio = io();
 
       	        socketio.on('homeConnect/browser/dashboard/rpiUpdate', function(msg) {
+      	            console.log(msg);
                     document.getElementById('myText').innerHTML = msg.data;
       	        });
             });
