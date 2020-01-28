@@ -22,7 +22,6 @@ WiFiClient espClient;
 PubSubClient client;
 
 void setup() {
-  Serial.println(MQTT_MAX_PACKET_SIZE);
   Serial.begin(9600);
   setup_wifi();
   client.setClient(espClient);

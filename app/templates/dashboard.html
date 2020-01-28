@@ -42,7 +42,7 @@
         <div class="body">
             <div class = "devices">
                 {% for device in devices %}
-                    {% if device.payload.device_type == "switch" %}
+                    {% if device.payload.device_type == "on_off_switch" %}
                         <br><b><span>{{ device.name }}</span></b>
                         <input type="button" id="{{ device.name }}" value="Invalid" onclick="deviceChangeState('{{ device.name }}', -1)"/>
                         <br>
