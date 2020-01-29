@@ -54,7 +54,7 @@ def device_discovery(payload):
     }
 """
 def browser_update(payload):
-    print('reached to 2', payload)
+    print('reached to 2', payload['ip_address'])
     device = RegisteredDevice.query.filter_by(ip_address=payload['ip_address']).first()
     if device:
         message = {
@@ -172,6 +172,7 @@ def get_device_info():
     }
     if request.method == 'POST':
         payload = request.get_json()
+        print('reached 4', payload['ip_address'])
         registered_device = RegisteredDevice.query.filter_by(ip_address=payload['ip_address']).first()
         if registered_device:
             response = {
@@ -180,6 +181,7 @@ def get_device_info():
                 'name': registered_device.name
             }
         elif registered_device is None:
+            print('reached 5', payload['ip_address'])
             unregistered_device = Device.query.filter_by(ip_address=payload['ip_address']).first()
             if unregistered_device:
                 response = {
@@ -207,7 +209,7 @@ def register_device():
     }
     if request.method == 'POST':
         payload = request.get_json()
-        print(payload)
+        print('reached 6', payload['ip_address'])
         unregistered_device = Device.query.filter_by(ip_address=payload['ip_address']).first()
         if unregistered_device:
             registered_device = RegisteredDevice(ip_address=unregistered_device.ip_address,
@@ -318,6 +320,7 @@ def device_change_state():
     }
     if request.method == 'POST':
         payload = request.get_json()
+        print('reached 7', payload['name'])
         device = RegisteredDevice.query.filter_by(name=payload['name']).first()
         if device:
             device_payload = json.loads(device.payload)
