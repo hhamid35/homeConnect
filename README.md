@@ -1,3 +1,3 @@
 # homeConnect
 
-### python3 app.py
+## ~python3 run.py~
